@@ -90,6 +90,8 @@ enum {
 
 -(void) addNewBall
 {
+    CGSize screenSize = [CCDirector sharedDirector].winSize;
+
     CCSpriteBatchNode *batch = [CCSpriteBatchNode batchNodeWithFile:@"Ball.png" capacity:0];
     [self addChild:batch z:0 tag:kTagBatchNode];
     
@@ -98,12 +100,14 @@ enum {
     CCSprite *sprite = [CCSprite spriteWithBatchNode:batch rect:CGRectMake(0,0,30,30)];
 	[batch addChild:sprite];
 	
-	sprite.position = ccp(160, 480 - sprite.contentSize.height/2);
+    int ballPosX = screenSize.width/2;
+    int ballPosY = screenSize.height - sprite.contentSize.height/2;
+	sprite.position = ccp(ballPosX, ballPosY);
 	
 	b2BodyDef bodyDef;
 	bodyDef.type = b2_dynamicBody;
     
-	bodyDef.position.Set(160/PTM_RATIO, (480 - sprite.contentSize.height/2)/PTM_RATIO);
+	bodyDef.position.Set(ballPosX/PTM_RATIO, ballPosY/PTM_RATIO);
 	bodyDef.userData = sprite;
 	bodyBall = world->CreateBody(&bodyDef);
 	NSLog(@"%@", bodyBall->GetUserData());
