@@ -8,6 +8,7 @@
 
 #import "BJGameController.h"
 #import "BJBackgroundLayer.h"
+#import "BJGameLayer.h"
 
 @implementation BJGameController
 @synthesize mainScene;
@@ -18,7 +19,7 @@
         self.mainScene = [CCScene node];
         
         [self.mainScene addChild:[BJBackgroundLayer node] z:BJLayerZBackground];
-        
+        [self.mainScene addChild:[BJGameLayer node] z:BJLayerZMain];
         
         [[CCDirector sharedDirector] runWithScene:self.mainScene];
     }
