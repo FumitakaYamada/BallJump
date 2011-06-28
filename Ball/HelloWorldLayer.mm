@@ -209,7 +209,6 @@ enum {
     float block_center_x = p.x/PTM_RATIO;
     float block_center_y = p.y/PTM_RATIO;
     
-//    CCSprite *obj;
     if (tag == 1) {
         obj = [CCSprite spriteWithFile:@"Block1.png"];
         [scrollLayer addChild:obj z:1];
@@ -261,32 +260,39 @@ enum {
     int num = 0;
 	for (b2Body* b = world->GetBodyList(); b; b = b->GetNext())
 	{
-		if (b->GetUserData() != NULL) {
+		if (b->GetUserData() != NULL && b->GetUserData() != bodyBall->GetUserData()) {
             currentPosX = b->GetPosition().x * PTM_RATIO;
             currentPosY = b->GetPosition().y * PTM_RATIO;
             nextPosX = currentPosX;
             nextPosY = currentPosY + pos[num];
             
 			//Synchronize the AtlasSprites position and rotation with the corresponding body
-            if (nextPosY < 480) {
+            if (nextPosY < 485) {
                 pos[num] = pos[num] + 0.8;
             }else {
                 pos[num] = -480;
+//                [self addNewObject:1 point:ccp(160, -480)];
             }
             obj = (CCSprite*)b->GetUserData();
 			obj.position = CGPointMake(nextPosX, nextPosY);
 			obj.rotation = -1 * CC_RADIANS_TO_DEGREES(b->GetAngle());
+//            NSLog(@"obj:%d:%@", num, b->GetUserData());
             num++;
-		}
+		}else if (b->GetUserData() != NULL && b->GetUserData() == bodyBall->GetUserData()){
+            currentPosX = b->GetPosition().x * PTM_RATIO;
+            currentPosY = b->GetPosition().y * PTM_RATIO;
+            nextPosX = currentPosX;
+            nextPosY = currentPosY + pos[num];
+            if (nextPosY < 480 + 15 || nextPosY > -15) {
+                pos[num] = pos[num] + 0.8;
+            }
+            sprite = (CCSprite*)b->GetUserData();
+			sprite.position = CGPointMake(currentPosX, currentPosY);
+            sprite.rotation = -1 * CC_RADIANS_TO_DEGREES(b->GetAngle());
+//            NSLog(@"sprite:%d:%@", num, b->GetUserData());
+            num++;
+        }
 	}
-    
-//    interval++;
-//    if (interval % 480 == 0) {
-//        interval = 0;
-//        randTag = rand()%3 + 1;
-//        randX = rand()%300;
-//        [self addNewObject:randTag point:ccp(randX, -50)];
-//    }
 }
 
 - (void)accelerometer:(UIAccelerometer*)accelerometer didAccelerate:(UIAcceleration*)acceleration

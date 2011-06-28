@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BJGameController.h"
 
 @class RootViewController;
 
@@ -16,5 +17,5 @@
 }
 
 @property (nonatomic, retain) UIWindow *window;
-
+@property (nonatomic, retain) BJGameController *mainController;
 @end

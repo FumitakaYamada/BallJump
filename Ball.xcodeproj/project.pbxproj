@@ -160,6 +160,9 @@
 		B80235C213A62AAD00BF29FC /* GLES-Render.mm in Sources */ = {isa = PBXBuildFile; fileRef = B80235C113A62AAD00BF29FC /* GLES-Render.mm */; };
 		B80235C513A62AAD00BF29FC /* blocks.png in Resources */ = {isa = PBXBuildFile; fileRef = B80235C413A62AAD00BF29FC /* blocks.png */; };
 		B80235CC13A63BA000BF29FC /* Background.png in Resources */ = {isa = PBXBuildFile; fileRef = B80235CB13A63B9F00BF29FC /* Background.png */; };
+		B846510113B9F15B00000027 /* BJGameController.m in Sources */ = {isa = PBXBuildFile; fileRef = B846510013B9F15B00000027 /* BJGameController.m */; };
+		B846517813B9F36A00000027 /* BJBackgroundLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B846517713B9F36900000027 /* BJBackgroundLayer.m */; };
+		B846517B13B9F38B00000027 /* BJGameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B846517A13B9F38A00000027 /* BJGameLayer.m */; };
 		B89DC89013ABDB2D00224A01 /* Ball.png in Resources */ = {isa = PBXBuildFile; fileRef = B89DC88F13ABDB2D00224A01 /* Ball.png */; };
 		B89DCB1C13AD5A8300224A01 /* Block1.png in Resources */ = {isa = PBXBuildFile; fileRef = B89DCB1913AD5A8300224A01 /* Block1.png */; };
 		B89DCB1D13AD5A8300224A01 /* Block2.png in Resources */ = {isa = PBXBuildFile; fileRef = B89DCB1A13AD5A8300224A01 /* Block2.png */; };
@@ -479,6 +482,12 @@
 		B80235C313A62AAD00BF29FC /* GameConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameConfig.h; sourceTree = "<group>"; };
 		B80235C413A62AAD00BF29FC /* blocks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blocks.png; path = Resources/blocks.png; sourceTree = "<group>"; };
 		B80235CB13A63B9F00BF29FC /* Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Background.png; sourceTree = "<group>"; };
+		B84650FF13B9F15B00000027 /* BJGameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BJGameController.h; sourceTree = "<group>"; };
+		B846510013B9F15B00000027 /* BJGameController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BJGameController.m; sourceTree = "<group>"; };
+		B846517613B9F36900000027 /* BJBackgroundLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BJBackgroundLayer.h; sourceTree = "<group>"; };
+		B846517713B9F36900000027 /* BJBackgroundLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BJBackgroundLayer.m; sourceTree = "<group>"; };
+		B846517913B9F38A00000027 /* BJGameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BJGameLayer.h; sourceTree = "<group>"; };
+		B846517A13B9F38A00000027 /* BJGameLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BJGameLayer.m; sourceTree = "<group>"; };
 		B89DC88F13ABDB2D00224A01 /* Ball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Ball.png; sourceTree = "<group>"; };
 		B89DCB1913AD5A8300224A01 /* Block1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Block1.png; sourceTree = "<group>"; };
 		B89DCB1A13AD5A8300224A01 /* Block2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Block2.png; sourceTree = "<group>"; };
@@ -545,9 +554,15 @@
 				B80235BB13A62AAD00BF29FC /* RootViewController.m */,
 				B80235BD13A62AAD00BF29FC /* HelloWorldLayer.h */,
 				B80235BE13A62AAD00BF29FC /* HelloWorldLayer.mm */,
+				B84650FF13B9F15B00000027 /* BJGameController.h */,
+				B846510013B9F15B00000027 /* BJGameController.m */,
 				B80235C013A62AAD00BF29FC /* GLES-Render.h */,
 				B80235C113A62AAD00BF29FC /* GLES-Render.mm */,
 				B80235C313A62AAD00BF29FC /* GameConfig.h */,
+				B846517613B9F36900000027 /* BJBackgroundLayer.h */,
+				B846517713B9F36900000027 /* BJBackgroundLayer.m */,
+				B846517913B9F38A00000027 /* BJGameLayer.h */,
+				B846517A13B9F38A00000027 /* BJGameLayer.m */,
 				B80233F313A62AAA00BF29FC /* Resources */,
 				B802340713A62AAB00BF29FC /* libs */,
 				B80235B313A62AAD00BF29FC /* Supporting Files */,
@@ -1227,6 +1242,9 @@
 				B80235BC13A62AAD00BF29FC /* RootViewController.m in Sources */,
 				B80235BF13A62AAD00BF29FC /* HelloWorldLayer.mm in Sources */,
 				B80235C213A62AAD00BF29FC /* GLES-Render.mm in Sources */,
+				B846510113B9F15B00000027 /* BJGameController.m in Sources */,
+				B846517813B9F36A00000027 /* BJBackgroundLayer.m in Sources */,
+				B846517B13B9F38B00000027 /* BJGameLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
