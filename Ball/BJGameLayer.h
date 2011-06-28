@@ -22,6 +22,6 @@
 
 }
 + (id)node;
--(void) addNewSpriteWithCoords:(CGPoint)p;
+-(void) addNewBall;
 -(void) addNewObject;
 @end

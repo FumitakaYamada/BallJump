@@ -81,14 +81,14 @@ enum {
 		groundBox.SetAsEdge(b2Vec2(screenSize.width/PTM_RATIO,screenSize.height/PTM_RATIO*2), b2Vec2(screenSize.width/PTM_RATIO,-screenSize.height/PTM_RATIO*100));
 		groundBody->CreateFixture(&groundBox,0);
 /*===================================================================================================*/		
-        [self addNewSpriteWithCoords:ccp(160, 480 - 15)];
+        [self addNewBall];
         [self schedule: @selector(tick:)];
         
     }
     return self;
 }
 
--(void) addNewSpriteWithCoords:(CGPoint)p
+-(void) addNewBall
 {
     CCSpriteBatchNode *batch = [CCSpriteBatchNode batchNodeWithFile:@"Ball.png" capacity:0];
     [self addChild:batch z:0 tag:kTagBatchNode];
@@ -98,12 +98,12 @@ enum {
     CCSprite *sprite = [CCSprite spriteWithBatchNode:batch rect:CGRectMake(0,0,30,30)];
 	[batch addChild:sprite];
 	
-	sprite.position = ccp(p.x, p.y);
+	sprite.position = ccp(160, 480 - sprite.contentSize.height/2);
 	
 	b2BodyDef bodyDef;
 	bodyDef.type = b2_dynamicBody;
     
-	bodyDef.position.Set(p.x/PTM_RATIO, p.y/PTM_RATIO);
+	bodyDef.position.Set(160/PTM_RATIO, (480 - sprite.contentSize.height/2)/PTM_RATIO);
 	bodyDef.userData = sprite;
 	bodyBall = world->CreateBody(&bodyDef);
 	NSLog(@"%@", bodyBall->GetUserData());
