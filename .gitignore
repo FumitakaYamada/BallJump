@@ -1,2 +1,6 @@
 .DS_Store
 *.swp
+
+Ball.xcodeproj/xcuserdata*
+Ball.xcodeproj/project.xcworkspace*
+
