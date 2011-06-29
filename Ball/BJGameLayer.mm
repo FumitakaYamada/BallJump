@@ -31,6 +31,7 @@ enum {
     self = [super init];
     
     if (self) {
+        srand(time(NULL));
         
         self.isAccelerometerEnabled = YES;
         block.interval = 0;
@@ -84,6 +85,7 @@ enum {
 		groundBody->CreateFixture(&groundBox,0);
 /*===================================================================================================*/		
         [self addNewBall];
+        [self addFirstBlock];
         [self schedule: @selector(tick:)];        
     }
     return self;
@@ -123,6 +125,44 @@ enum {
     fixtureDef.restitution = 0.3f;  // 霍ｳ縺ｭ霑斐ｊ
     bodyBall->CreateFixture(&fixtureDef);
     
+}
+
+-(void) addFirstBlock{
+    CCSprite *obj;
+    block = [BJBlocks new];
+    block.imageNum = rand()%3 + 1;
+    if (block.imageNum == 1) {
+        obj = [CCSprite spriteWithFile:@"Block1.png"];
+        [self addChild:obj z:1];
+    }
+ 	if (block.imageNum == 2) {
+        obj = [CCSprite spriteWithFile:@"Block2.png"];
+        [self addChild:obj z:1];
+    }
+    if (block.imageNum == 3) {
+        obj = [CCSprite spriteWithFile:@"Block3.png"];
+        [self addChild:obj z:1];
+    }
+    
+    block.width = obj.contentSize.width;
+    block.height = obj.contentSize.height;
+    block.currentPosX = 320/2;
+    block.currentPosY = 0;
+    
+    b2BodyDef bodyDefBlock;
+    bodyDefBlock.type = b2_staticBody;
+    bodyDefBlock.userData = obj;
+    bodyDefBlock.position.Set(block.currentPosX/PTM_RATIO, block.currentPosY/PTM_RATIO);
+    b2Body *bodyBlock = world->CreateBody(&bodyDefBlock);
+    b2PolygonShape shape;
+    shape.SetAsBox(obj.contentSize.width/2/PTM_RATIO, obj.contentSize.height/2/PTM_RATIO, b2Vec2(0, 0), 0.0f);
+    
+    CCMoveBy *move = [CCMoveBy actionWithDuration:10 
+                                         position:ccp(0, 480)];
+    [self runAction:[CCRepeatForever actionWithAction:move]];
+    bodyBlock->CreateFixture(&shape, 0.0f);
+    
+    block.currentPosY = bodyBlock->GetPosition().y * PTM_RATIO;
 }
 
 -(void) addNewObject:(int)count Term:(int)term{

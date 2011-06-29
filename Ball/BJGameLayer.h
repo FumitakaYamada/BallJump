@@ -24,5 +24,6 @@
 }
 + (id)node;
 -(void) addNewBall;
+-(void) addFirstBlock;
 -(void) addNewObject:(int)count Term:(int)term;
 @end

@@ -18,7 +18,7 @@
     if (self) {
         self.mainScene = [CCScene node];
         
-//        [self.mainScene addChild:[BJBackgroundLayer node] z:BJLayerZBackground];
+        [self.mainScene addChild:[BJBackgroundLayer node] z:BJLayerZBackground];
         [self.mainScene addChild:[BJGameLayer node] z:BJLayerZMain];
         
         [[CCDirector sharedDirector] runWithScene:self.mainScene];
