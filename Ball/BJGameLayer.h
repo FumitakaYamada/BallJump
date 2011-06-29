@@ -18,10 +18,11 @@
     b2World* world;
     GLESDebugDraw *m_debugDraw;
     b2Body *bodyBall;
-    b2Body *bodyBlock;
+    
+    int termNum;
 
 }
 + (id)node;
 -(void) addNewBall;
--(void) addNewObject;
+-(void) addNewObject:(int)count Term:(int)term;
 @end

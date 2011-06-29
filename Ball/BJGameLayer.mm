@@ -17,7 +17,7 @@ enum {
 };
 
 @interface BJGameLayer()
-@property (nonatomic,retain) BJBlocks *block;
+@property (nonatomic, retain) BJBlocks *block;
 @end
 
 @implementation BJGameLayer
@@ -33,6 +33,8 @@ enum {
     if (self) {
         
         self.isAccelerometerEnabled = YES;
+        block.interval = 0;
+        termNum = 0;
         
         CGSize screenSize = [CCDirector sharedDirector].winSize;
 
@@ -82,8 +84,7 @@ enum {
 		groundBody->CreateFixture(&groundBox,0);
 /*===================================================================================================*/		
         [self addNewBall];
-        [self schedule: @selector(tick:)];
-        
+        [self schedule: @selector(tick:)];        
     }
     return self;
 }
@@ -92,13 +93,15 @@ enum {
 {
     CGSize screenSize = [CCDirector sharedDirector].winSize;
 
-    CCSpriteBatchNode *batch = [CCSpriteBatchNode batchNodeWithFile:@"Ball.png" capacity:0];
-    [self addChild:batch z:0 tag:kTagBatchNode];
-    
-	batch = (CCSpriteBatchNode*) [self getChildByTag:kTagBatchNode];
-	
-    CCSprite *sprite = [CCSprite spriteWithBatchNode:batch rect:CGRectMake(0,0,30,30)];
-	[batch addChild:sprite];
+//    CCSpriteBatchNode *batch = [CCSpriteBatchNode batchNodeWithFile:@"Ball.png" capacity:0];
+//    [self addChild:batch z:0 tag:kTagBatchNode];
+//    
+//	batch = (CCSpriteBatchNode*) [self getChildByTag:kTagBatchNode];
+//	
+//    CCSprite *sprite = [CCSprite spriteWithBatchNode:batch rect:CGRectMake(0,0,30,30)];
+//	[batch addChild:sprite];
+    CCSprite *sprite = [CCSprite spriteWithFile:@"Ball.png"];
+    [self addChild:sprite];
 	
     int ballPosX = screenSize.width/2;
     int ballPosY = screenSize.height - sprite.contentSize.height/2;
@@ -106,7 +109,6 @@ enum {
 	
 	b2BodyDef bodyDef;
 	bodyDef.type = b2_dynamicBody;
-    
 	bodyDef.position.Set(ballPosX/PTM_RATIO, ballPosY/PTM_RATIO);
 	bodyDef.userData = sprite;
 	bodyBall = world->CreateBody(&bodyDef);
@@ -123,43 +125,63 @@ enum {
     
 }
 
--(void) addNewObject{
+-(void) addNewObject:(int)count Term:(int)term{
     
     CCSprite *obj;
     block = [BJBlocks new];
-    self.block.imageNum = random()%3 + 1;
-    self.block.interval = 0;
-    self.block.moveIntervalPosY = 1.0;
-    
-    if (self.block.imageNum == 1) {
+    block.imageNum = rand()%3 + 1;
+    block.moveIntervalPosY = 1.0;
+    if (block.imageNum == 1) {
         obj = [CCSprite spriteWithFile:@"Block1.png"];
         [self addChild:obj z:1];
     }
- 	if (self.block.imageNum == 2) {
+ 	if (block.imageNum == 2) {
         obj = [CCSprite spriteWithFile:@"Block2.png"];
         [self addChild:obj z:1];
     }
-    if (self.block.imageNum == 3) {
+    if (block.imageNum == 3) {
         obj = [CCSprite spriteWithFile:@"Block3.png"];
         [self addChild:obj z:1];
     }
     
-    self.block.width = obj.contentSize.width;
-    self.block.height = obj.contentSize.height;
-    self.block.currentPosX = (int)random()%320 + 50;
-    self.block.currentPosY = -self.block.height/2;
+    block.width = obj.contentSize.width;
+    block.height = obj.contentSize.height;
+    block.currentPosX = rand()%320;
+    block.currentPosY = -480/6*count -480*term;
         
     b2BodyDef bodyDefBlock;
     bodyDefBlock.type = b2_staticBody;
     bodyDefBlock.userData = obj;
-    bodyDefBlock.position.Set(self.block.currentPosX/PTM_RATIO, self.block.currentPosY/PTM_RATIO);
-    bodyBlock = world->CreateBody(&bodyDefBlock);
+    bodyDefBlock.position.Set(block.currentPosX/PTM_RATIO, block.currentPosY/PTM_RATIO);
+    b2Body *bodyBlock = world->CreateBody(&bodyDefBlock);
     b2PolygonShape shape;
     shape.SetAsBox(obj.contentSize.width/2/PTM_RATIO, obj.contentSize.height/2/PTM_RATIO, b2Vec2(0, 0), 0.0f);
 
+    CCMoveBy *move = [CCMoveBy actionWithDuration:10 
+                                                     position:ccp(0, 480)];
+    [self runAction:[CCRepeatForever actionWithAction:move]];
     bodyBlock->CreateFixture(&shape, 0.0f);
+    
+    block.currentPosY = bodyBlock->GetPosition().y * PTM_RATIO;
 }
 
+-(void) draw
+{
+	// Default GL states: GL_TEXTURE_2D, GL_VERTEX_ARRAY, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
+	// Needed states:  GL_VERTEX_ARRAY, 
+	// Unneeded states: GL_TEXTURE_2D, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
+	glDisable(GL_TEXTURE_2D);
+	glDisableClientState(GL_COLOR_ARRAY);
+	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	
+	world->DrawDebugData();
+	
+	// restore default GL states
+	glEnable(GL_TEXTURE_2D);
+	glEnableClientState(GL_COLOR_ARRAY);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+    
+}
 
 -(void) tick: (ccTime) dt
 {
@@ -174,10 +196,17 @@ enum {
 	// Instruct the world to perform a single step of simulation. It is
 	// generally best to keep the time step and iterations fixed.
 	world->Step(dt, velocityIterations, positionIterations);
-    
+    block.nextPosY = block.currentPosY + block.moveIntervalPosY;
+    block.currentPosY = block.nextPosY;
 	//Iterate over the bodies in the physics world
     for (b2Body* b = world->GetBodyList(); b; b = b->GetNext())
 	{
+        if (b->GetUserData() != NULL) {
+            CCSprite *myAct = (CCSprite*)b->GetUserData();
+			myAct.position = CGPointMake(b->GetPosition().x * PTM_RATIO, b->GetPosition().y * PTM_RATIO);
+			myAct.rotation = -1 * CC_RADIANS_TO_DEGREES(b->GetAngle());
+        }
+/*
 		if (b->GetUserData() != NULL && b->GetUserData() == bodyBall->GetUserData()){
 			//Synchronize the AtlasSprites position and rotation with the corresponding body
             CCSprite *myAct = (CCSprite*)b->GetUserData();
@@ -191,12 +220,34 @@ enum {
             self.block.currentPosY = self.block.nextPosY;
             //            NSLog(@"obj:%d:%@", num, b->GetUserData());
         }
+*/
 	}
     
-    if (self.block.interval % 120 == 0) {
-        [self addNewObject];
+    if (block.interval % 600 == 0) {
+        for (int i = 1; i < 7; i++) {
+            [self addNewObject:i Term:termNum];
+        }
+        termNum++;
     }
-    self.block.interval++;
+    block.interval++;
+}
+
+- (void)accelerometer:(UIAccelerometer*)accelerometer didAccelerate:(UIAcceleration*)acceleration
+{	
+	static float prevX=0;
+	
+	//#define kFilterFactor 0.05f
+#define kFilterFactor 1.0f	// don't use filter. the code is here just as an example
+	
+	float accelX = (float) acceleration.x * kFilterFactor + (1- kFilterFactor)*prevX;
+	
+	prevX = accelX;
+	
+	// accelerometer values are in "Portrait" mode. Change them to Landscape left
+	// multiply the gravity by 10
+	b2Vec2 gravity( accelX * 10, -10.0f);
+	
+	world->SetGravity( gravity );
 }
 
 // on "dealloc" you need to release all your retained objects

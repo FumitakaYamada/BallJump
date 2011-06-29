@@ -17,8 +17,8 @@
     int width;
     int height;
     int imageNum;
-    float moveIntervalPosY;
     int interval;
+    float moveIntervalPosY;
 }
 @property (assign) float currentPosX, currentPosY, nextPosX, nextPosY, moveIntervalPosY;
 @property (assign) int width, height, imageNum, interval;
