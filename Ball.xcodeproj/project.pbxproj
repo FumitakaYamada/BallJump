@@ -168,6 +168,11 @@
 		B89DCB1D13AD5A8300224A01 /* Block2.png in Resources */ = {isa = PBXBuildFile; fileRef = B89DCB1A13AD5A8300224A01 /* Block2.png */; };
 		B89DCB1E13AD5A8300224A01 /* Block3.png in Resources */ = {isa = PBXBuildFile; fileRef = B89DCB1B13AD5A8300224A01 /* Block3.png */; };
 		B8D6C10513BA2849005900A9 /* BJBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = B8D6C10413BA2849005900A9 /* BJBlocks.m */; };
+		B8FA221713BB669A004E55A9 /* cloud1.png in Resources */ = {isa = PBXBuildFile; fileRef = B8FA221213BB669A004E55A9 /* cloud1.png */; };
+		B8FA221813BB669A004E55A9 /* cloud2.png in Resources */ = {isa = PBXBuildFile; fileRef = B8FA221313BB669A004E55A9 /* cloud2.png */; };
+		B8FA221913BB669A004E55A9 /* cloud3.png in Resources */ = {isa = PBXBuildFile; fileRef = B8FA221413BB669A004E55A9 /* cloud3.png */; };
+		B8FA221A13BB669A004E55A9 /* cloud4.png in Resources */ = {isa = PBXBuildFile; fileRef = B8FA221513BB669A004E55A9 /* cloud4.png */; };
+		B8FA221F13BB671F004E55A9 /* object1.png in Resources */ = {isa = PBXBuildFile; fileRef = B8FA221E13BB671F004E55A9 /* object1.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -495,6 +500,11 @@
 		B89DCB1B13AD5A8300224A01 /* Block3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Block3.png; sourceTree = "<group>"; };
 		B8D6C10313BA2849005900A9 /* BJBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BJBlocks.h; path = Ball.xcodeproj/BJBlocks.h; sourceTree = SOURCE_ROOT; };
 		B8D6C10413BA2849005900A9 /* BJBlocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BJBlocks.m; path = Ball.xcodeproj/BJBlocks.m; sourceTree = SOURCE_ROOT; };
+		B8FA221213BB669A004E55A9 /* cloud1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloud1.png; sourceTree = "<group>"; };
+		B8FA221313BB669A004E55A9 /* cloud2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloud2.png; sourceTree = "<group>"; };
+		B8FA221413BB669A004E55A9 /* cloud3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloud3.png; sourceTree = "<group>"; };
+		B8FA221513BB669A004E55A9 /* cloud4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloud4.png; sourceTree = "<group>"; };
+		B8FA221E13BB671F004E55A9 /* object1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = object1.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -578,6 +588,11 @@
 		B80233F313A62AAA00BF29FC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B8FA221E13BB671F004E55A9 /* object1.png */,
+				B8FA221213BB669A004E55A9 /* cloud1.png */,
+				B8FA221313BB669A004E55A9 /* cloud2.png */,
+				B8FA221413BB669A004E55A9 /* cloud3.png */,
+				B8FA221513BB669A004E55A9 /* cloud4.png */,
 				B89DC88F13ABDB2D00224A01 /* Ball.png */,
 				B89DCB1913AD5A8300224A01 /* Block1.png */,
 				B89DCB1A13AD5A8300224A01 /* Block2.png */,
@@ -1103,6 +1118,11 @@
 				B89DCB1C13AD5A8300224A01 /* Block1.png in Resources */,
 				B89DCB1D13AD5A8300224A01 /* Block2.png in Resources */,
 				B89DCB1E13AD5A8300224A01 /* Block3.png in Resources */,
+				B8FA221713BB669A004E55A9 /* cloud1.png in Resources */,
+				B8FA221813BB669A004E55A9 /* cloud2.png in Resources */,
+				B8FA221913BB669A004E55A9 /* cloud3.png in Resources */,
+				B8FA221A13BB669A004E55A9 /* cloud4.png in Resources */,
+				B8FA221F13BB671F004E55A9 /* object1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

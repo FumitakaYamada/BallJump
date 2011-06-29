@@ -102,7 +102,7 @@ enum {
 //	
 //    CCSprite *sprite = [CCSprite spriteWithBatchNode:batch rect:CGRectMake(0,0,30,30)];
 //	[batch addChild:sprite];
-    CCSprite *sprite = [CCSprite spriteWithFile:@"Ball.png"];
+    CCSprite *sprite = [CCSprite spriteWithFile:@"object1.png"];
     [self addChild:sprite];
 	
     int ballPosX = screenSize.width/2;
@@ -132,15 +132,19 @@ enum {
     block = [BJBlocks new];
     block.imageNum = rand()%3 + 1;
     if (block.imageNum == 1) {
-        obj = [CCSprite spriteWithFile:@"Block1.png"];
+        obj = [CCSprite spriteWithFile:@"cloud1.png"];
         [self addChild:obj z:1];
     }
  	if (block.imageNum == 2) {
-        obj = [CCSprite spriteWithFile:@"Block2.png"];
+        obj = [CCSprite spriteWithFile:@"cloud2.png"];
         [self addChild:obj z:1];
     }
     if (block.imageNum == 3) {
-        obj = [CCSprite spriteWithFile:@"Block3.png"];
+        obj = [CCSprite spriteWithFile:@"cloud3.png"];
+        [self addChild:obj z:1];
+    }
+    if (block.imageNum == 4) {
+        obj = [CCSprite spriteWithFile:@"cloud4.png"];
         [self addChild:obj z:1];
     }
     
@@ -155,7 +159,7 @@ enum {
     bodyDefBlock.position.Set(block.currentPosX/PTM_RATIO, block.currentPosY/PTM_RATIO);
     b2Body *bodyBlock = world->CreateBody(&bodyDefBlock);
     b2PolygonShape shape;
-    shape.SetAsBox(obj.contentSize.width/2/PTM_RATIO, obj.contentSize.height/2/PTM_RATIO, b2Vec2(0, 0), 0.0f);
+    shape.SetAsBox((obj.contentSize.width/2 - 5)/PTM_RATIO, (obj.contentSize.height/2 - 15)/PTM_RATIO, b2Vec2(0, 0), 0.0f);
     
     CCMoveBy *move = [CCMoveBy actionWithDuration:10 
                                          position:ccp(0, 480)];
@@ -169,18 +173,22 @@ enum {
     
     CCSprite *obj;
     block = [BJBlocks new];
-    block.imageNum = rand()%3 + 1;
+    block.imageNum = rand()%4 + 1;
     block.moveIntervalPosY = 1.0;
     if (block.imageNum == 1) {
-        obj = [CCSprite spriteWithFile:@"Block1.png"];
+        obj = [CCSprite spriteWithFile:@"cloud1.png"];
         [self addChild:obj z:1];
     }
  	if (block.imageNum == 2) {
-        obj = [CCSprite spriteWithFile:@"Block2.png"];
+        obj = [CCSprite spriteWithFile:@"cloud2.png"];
         [self addChild:obj z:1];
     }
     if (block.imageNum == 3) {
-        obj = [CCSprite spriteWithFile:@"Block3.png"];
+        obj = [CCSprite spriteWithFile:@"cloud3.png"];
+        [self addChild:obj z:1];
+    }
+    if (block.imageNum == 4) {
+        obj = [CCSprite spriteWithFile:@"cloud4.png"];
         [self addChild:obj z:1];
     }
     
@@ -195,7 +203,7 @@ enum {
     bodyDefBlock.position.Set(block.currentPosX/PTM_RATIO, block.currentPosY/PTM_RATIO);
     b2Body *bodyBlock = world->CreateBody(&bodyDefBlock);
     b2PolygonShape shape;
-    shape.SetAsBox(obj.contentSize.width/2/PTM_RATIO, obj.contentSize.height/2/PTM_RATIO, b2Vec2(0, 0), 0.0f);
+    shape.SetAsBox((obj.contentSize.width/2 - 5)/PTM_RATIO, (obj.contentSize.height/2 - 15)/PTM_RATIO, b2Vec2(0, 0), 0.0f);
 
     CCMoveBy *move = [CCMoveBy actionWithDuration:10 
                                                      position:ccp(0, 480)];
@@ -205,23 +213,23 @@ enum {
     block.currentPosY = bodyBlock->GetPosition().y * PTM_RATIO;
 }
 
--(void) draw
-{
-	// Default GL states: GL_TEXTURE_2D, GL_VERTEX_ARRAY, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
-	// Needed states:  GL_VERTEX_ARRAY, 
-	// Unneeded states: GL_TEXTURE_2D, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
-	glDisable(GL_TEXTURE_2D);
-	glDisableClientState(GL_COLOR_ARRAY);
-	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-	
-	world->DrawDebugData();
-	
-	// restore default GL states
-	glEnable(GL_TEXTURE_2D);
-	glEnableClientState(GL_COLOR_ARRAY);
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-    
-}
+//-(void) draw
+//{
+//	// Default GL states: GL_TEXTURE_2D, GL_VERTEX_ARRAY, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
+//	// Needed states:  GL_VERTEX_ARRAY, 
+//	// Unneeded states: GL_TEXTURE_2D, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
+//	glDisable(GL_TEXTURE_2D);
+//	glDisableClientState(GL_COLOR_ARRAY);
+//	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+//	
+//	world->DrawDebugData();
+//	
+//	// restore default GL states
+//	glEnable(GL_TEXTURE_2D);
+//	glEnableClientState(GL_COLOR_ARRAY);
+//	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+//    
+//}
 
 -(void) tick: (ccTime) dt
 {
