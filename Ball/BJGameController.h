@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
+
 typedef enum _BJLayerZ {
     BJLayerZBackground  = 0x00000001 << 0,
     BJLayerZMain        = 0x00000001 << 1,

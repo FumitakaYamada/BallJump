@@ -173,6 +173,7 @@
 		B8FA221913BB669A004E55A9 /* cloud3.png in Resources */ = {isa = PBXBuildFile; fileRef = B8FA221413BB669A004E55A9 /* cloud3.png */; };
 		B8FA221A13BB669A004E55A9 /* cloud4.png in Resources */ = {isa = PBXBuildFile; fileRef = B8FA221513BB669A004E55A9 /* cloud4.png */; };
 		B8FA221F13BB671F004E55A9 /* object1.png in Resources */ = {isa = PBXBuildFile; fileRef = B8FA221E13BB671F004E55A9 /* object1.png */; };
+		B8FA222A13BB71C9004E55A9 /* BJGameOverLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B8FA222913BB71C9004E55A9 /* BJGameOverLayer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -505,6 +506,8 @@
 		B8FA221413BB669A004E55A9 /* cloud3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloud3.png; sourceTree = "<group>"; };
 		B8FA221513BB669A004E55A9 /* cloud4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloud4.png; sourceTree = "<group>"; };
 		B8FA221E13BB671F004E55A9 /* object1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = object1.png; sourceTree = "<group>"; };
+		B8FA222813BB71C9004E55A9 /* BJGameOverLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BJGameOverLayer.h; sourceTree = "<group>"; };
+		B8FA222913BB71C9004E55A9 /* BJGameOverLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BJGameOverLayer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -567,10 +570,12 @@
 				B80235BB13A62AAD00BF29FC /* RootViewController.m */,
 				B84650FF13B9F15B00000027 /* BJGameController.h */,
 				B846510013B9F15B00000027 /* BJGameController.mm */,
-				B846517613B9F36900000027 /* BJBackgroundLayer.h */,
-				B846517713B9F36900000027 /* BJBackgroundLayer.m */,
 				B846517913B9F38A00000027 /* BJGameLayer.h */,
 				B846517A13B9F38A00000027 /* BJGameLayer.mm */,
+				B846517613B9F36900000027 /* BJBackgroundLayer.h */,
+				B846517713B9F36900000027 /* BJBackgroundLayer.m */,
+				B8FA222813BB71C9004E55A9 /* BJGameOverLayer.h */,
+				B8FA222913BB71C9004E55A9 /* BJGameOverLayer.m */,
 				B8D6C10313BA2849005900A9 /* BJBlocks.h */,
 				B8D6C10413BA2849005900A9 /* BJBlocks.m */,
 				B80235BD13A62AAD00BF29FC /* HelloWorldLayer.h */,
@@ -1271,6 +1276,7 @@
 				B846517813B9F36A00000027 /* BJBackgroundLayer.m in Sources */,
 				B846517B13B9F38B00000027 /* BJGameLayer.mm in Sources */,
 				B8D6C10513BA2849005900A9 /* BJBlocks.m in Sources */,
+				B8FA222A13BB71C9004E55A9 /* BJGameOverLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

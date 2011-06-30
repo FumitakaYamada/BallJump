@@ -7,6 +7,7 @@
 //
 
 #import "BJGameLayer.h"
+#import "BJGameOverLayer.h"
 
 #define PTM_RATIO 32
 
@@ -17,11 +18,15 @@ enum {
 };
 
 @interface BJGameLayer()
+@property (nonatomic, retain) CCSprite *sprite;
 @property (nonatomic, retain) BJBlocks *block;
+@property (assign) BOOL flag;
 @end
 
 @implementation BJGameLayer
+@synthesize sprite;
 @synthesize block;
+@synthesize flag;
 
 + (id)node{
     return [[[BJGameLayer alloc] init] autorelease];
@@ -102,17 +107,17 @@ enum {
 //	
 //    CCSprite *sprite = [CCSprite spriteWithBatchNode:batch rect:CGRectMake(0,0,30,30)];
 //	[batch addChild:sprite];
-    CCSprite *sprite = [CCSprite spriteWithFile:@"object1.png"];
-    [self addChild:sprite];
+    self.sprite = [CCSprite spriteWithFile:@"object1.png"];
+    [self addChild:self.sprite];
 	
     int ballPosX = screenSize.width/2;
-    int ballPosY = screenSize.height - sprite.contentSize.height/2;
-	sprite.position = ccp(ballPosX, ballPosY);
+    int ballPosY = screenSize.height - self.sprite.contentSize.height/2;
+	self.sprite.position = ccp(ballPosX, ballPosY);
 	
 	b2BodyDef bodyDef;
 	bodyDef.type = b2_dynamicBody;
 	bodyDef.position.Set(ballPosX/PTM_RATIO, ballPosY/PTM_RATIO);
-	bodyDef.userData = sprite;
+	bodyDef.userData = self.sprite;
 	bodyBall = world->CreateBody(&bodyDef);
 	NSLog(@"%@", bodyBall->GetUserData());
     b2CircleShape circle;
@@ -254,22 +259,7 @@ enum {
 			myAct.position = CGPointMake(b->GetPosition().x * PTM_RATIO, b->GetPosition().y * PTM_RATIO);
 			myAct.rotation = -1 * CC_RADIANS_TO_DEGREES(b->GetAngle());
         }
-/*
-		if (b->GetUserData() != NULL && b->GetUserData() == bodyBall->GetUserData()){
-			//Synchronize the AtlasSprites position and rotation with the corresponding body
-            CCSprite *myAct = (CCSprite*)b->GetUserData();
-			myAct.position = CGPointMake(b->GetPosition().x * PTM_RATIO, b->GetPosition().y * PTM_RATIO);
-        }else {
-            self.block.nextPosY = self.block.currentPosY + self.block.moveIntervalPosY;
-			//Synchronize the AtlasSprites position and rotation with the corresponding body
-            CCSprite *myAct = (CCSprite*)b->GetUserData();
-			myAct.position = CGPointMake(b->GetPosition().x * PTM_RATIO, self.block.nextPosY);
-			myAct.rotation = -1 * CC_RADIANS_TO_DEGREES(b->GetAngle());
-            self.block.currentPosY = self.block.nextPosY;
-            //            NSLog(@"obj:%d:%@", num, b->GetUserData());
-        }
-*/
-	}
+    }
     
     if (block.interval % 600 == 0) {
         for (int i = 1; i < 7; i++) {
@@ -278,6 +268,18 @@ enum {
         termNum++;
     }
     block.interval++;
+    
+    if (bodyBall->GetPosition().y*PTM_RATIO>(480-480.0/600*block.interval*termNum) || 
+        bodyBall->GetPosition().y*PTM_RATIO<(-30/2-480.0/600*block.interval*(termNum)    )) {
+        if (self.flag == NO) {
+            int score = 100;
+            NSDictionary *dic = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%d", score] forKey:@"KEY"];
+            NSNotification *n = [NSNotification notificationWithName:@"GameOver" object:self userInfo:dic];
+            [[NSNotificationCenter defaultCenter] postNotification:n];
+            [self removeChild:self.sprite cleanup:YES];
+            self.flag = YES;
+        }
+    }
 }
 
 - (void)accelerometer:(UIAccelerometer*)accelerometer didAccelerate:(UIAcceleration*)acceleration
