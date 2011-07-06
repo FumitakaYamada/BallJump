@@ -1,16 +1,15 @@
 //
-//  BJGameLayer.m
+//  BJCloudLayer.m
 //  Ball
 //
-//  Created by Akifumi Fukaya on 11/06/28.
+//  Created by Akifumi Fukaya on 11/07/05.
 //  Copyright 2011 Keio University. All rights reserved.
 //
 
-#import "BJGameLayer.h"
-#import "BJBallLayer.h"
 #import "BJCloudLayer.h"
-#import "BJGameOverLayer.h"
 #import "BJCloud.h"
+#import "BJBallLayer.h"
+#import "BJGameOverLayer.h"
 
 
 #define PTM_RATIO 32
@@ -21,20 +20,19 @@ enum {
 	kTagAnimation1 = 1,
 };
 
-@interface BJGameLayer()
+@interface BJCloudLayer()
 @property (nonatomic, retain) BJBallLayer *ballLayer;
-@property (nonatomic, retain) BJCloudLayer *cloudLayer;
 @property (nonatomic, retain) BJCloud *cloud;
 @property (assign) BOOL flag;
 @end
 
-@implementation BJGameLayer
-@synthesize ballLayer, cloudLayer;
+@implementation BJCloudLayer
+@synthesize ballLayer;
 @synthesize cloud;
 @synthesize flag;
 
 + (id)node{
-    return [[[BJGameLayer alloc] init] autorelease];
+    return [[[BJCloudLayer alloc] init] autorelease];
 }
 
 - (id)init{
@@ -49,7 +47,7 @@ enum {
         termNum = 0;
         
         CGSize screenSize = [CCDirector sharedDirector].winSize;
-
+        
         // Define the gravity vector.
 		b2Vec2 gravity;
 		gravity.Set(0.0f, -10.0f);
@@ -70,7 +68,7 @@ enum {
         //		flags += b2DebugDraw::e_centerOfMassBit;
 		m_debugDraw->SetFlags(flags);		
 		
-/*===================================================================================================*/		
+        /*===================================================================================================*/		
 		// Define the ground body.
 		b2BodyDef groundBodyDef;
 		groundBodyDef.position.Set(0, 0); // bottom-left corner
@@ -79,13 +77,13 @@ enum {
 		// Define the ground box shape.
 		b2PolygonShape groundBox;		
 		
-//        // bottom
-//        groundBox.SetAsEdge(b2Vec2(0,-screenSize.height/PTM_RATIO), b2Vec2(screenSize.width/PTM_RATIO,-screenSize.height/PTM_RATIO));
-//        groundBody->CreateFixture(&groundBox,0);
-//		
-//        // top
-//        groundBox.SetAsEdge(b2Vec2(0,screenSize.height/PTM_RATIO*2), b2Vec2(screenSize.width/PTM_RATIO,screenSize.height/PTM_RATIO*2));
-//        groundBody->CreateFixture(&groundBox,0);
+        //        // bottom
+        //        groundBox.SetAsEdge(b2Vec2(0,-screenSize.height/PTM_RATIO), b2Vec2(screenSize.width/PTM_RATIO,-screenSize.height/PTM_RATIO));
+        //        groundBody->CreateFixture(&groundBox,0);
+        //		
+        //        // top
+        //        groundBox.SetAsEdge(b2Vec2(0,screenSize.height/PTM_RATIO*2), b2Vec2(screenSize.width/PTM_RATIO,screenSize.height/PTM_RATIO*2));
+        //        groundBody->CreateFixture(&groundBox,0);
 		
 		// left
 		groundBox.SetAsEdge(b2Vec2(0,screenSize.height/PTM_RATIO*2), b2Vec2(0,-screenSize.height/PTM_RATIO*100));
@@ -94,16 +92,11 @@ enum {
 		// right
 		groundBox.SetAsEdge(b2Vec2(screenSize.width/PTM_RATIO,screenSize.height/PTM_RATIO*2), b2Vec2(screenSize.width/PTM_RATIO,-screenSize.height/PTM_RATIO*100));
 		groundBody->CreateFixture(&groundBox,0);
-/*===================================================================================================*/		
+        /*===================================================================================================*/		
         
         self.ballLayer = [BJBallLayer layer:world];
         [self addChild:ballLayer];
-        
-//        self.cloudLayer = [BJCloudLayer layer:world];
-//        [self addChild:self.cloudLayer];
-        
-//        [self.cloudLayer addFirstCloud:world];
-        
+
         [self addFirstBlock];
         [self schedule: @selector(tick:)];  
     }
@@ -179,7 +172,7 @@ enum {
     cloud.height = obj.contentSize.height;
     cloud.currentPosX = rand()%320;
     cloud.currentPosY = -480/6*count -480*term;
-        
+    
     b2BodyDef bodyDefBlock;
     bodyDefBlock.type = b2_staticBody;
     bodyDefBlock.userData = obj;
@@ -187,9 +180,9 @@ enum {
     bodyBlock = world->CreateBody(&bodyDefBlock);
     b2PolygonShape shape;
     shape.SetAsBox((obj.contentSize.width/2 - 5)/PTM_RATIO, (obj.contentSize.height/2 - 15)/PTM_RATIO, b2Vec2(0, 0), 0.0f);
-
+    
     CCMoveBy *move = [CCMoveBy actionWithDuration:10 
-                                                     position:ccp(0, 480)];
+                                         position:ccp(0, 480)];
     [self runAction:[CCRepeatForever actionWithAction:move]];
     bodyBlock->CreateFixture(&shape, 0.0f);
     
@@ -228,7 +221,7 @@ enum {
 	// generally best to keep the time step and iterations fixed.
 	world->Step(dt, velocityIterations, positionIterations);
 	//Iterate over the bodies in the physics world
-//    [cloudLayer moveB2Object:world];
+    //    [cloudLayer moveB2Object:world];
     for (b2Body* b = world->GetBodyList(); b; b = b->GetNext())
 	{
         if (b->GetUserData() != NULL) {

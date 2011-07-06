@@ -9,6 +9,7 @@
 #import "BJGameController.h"
 #import "BJBackgroundLayer.h"
 #import "BJGameLayer.h"
+#import "BJCloudLayer.h"
 #import "BJGameOverLayer.h"
 
 @implementation BJGameController
@@ -24,7 +25,8 @@
         self.mainScene = [CCScene node];
         
         [self.mainScene addChild:[BJBackgroundLayer node] z:BJLayerZBackground];
-        [self.mainScene addChild:[BJGameLayer node] z:BJLayerZMain];
+//        [self.mainScene addChild:[BJGameLayer node] z:BJLayerZMain];
+        [self.mainScene addChild:[BJCloudLayer node] z:BJLayerZMain];
         
         BJGameOverLayer *gameScore = [BJGameOverLayer new];
         NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
@@ -37,7 +39,7 @@
 }
 
 - (void)gameOverLayer{
-    [self.mainScene addChild:[BJGameOverLayer node] z:BJLayerZMain];
+    [self.mainScene addChild:[BJGameOverLayer node] z:BJLayerZGameOver];
 }
 
 @end

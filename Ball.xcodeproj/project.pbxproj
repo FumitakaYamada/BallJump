@@ -163,11 +163,13 @@
 		B846510113B9F15B00000027 /* BJGameController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B846510013B9F15B00000027 /* BJGameController.mm */; };
 		B846517813B9F36A00000027 /* BJBackgroundLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B846517713B9F36900000027 /* BJBackgroundLayer.m */; };
 		B846517B13B9F38B00000027 /* BJGameLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = B846517A13B9F38A00000027 /* BJGameLayer.mm */; };
+		B89C12F813C2F9060010DC41 /* BJBallLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = B89C12F713C2F9060010DC41 /* BJBallLayer.mm */; };
+		B89C12FC13C2F9190010DC41 /* BJCloudLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = B89C12FB13C2F9190010DC41 /* BJCloudLayer.mm */; };
 		B89DC89013ABDB2D00224A01 /* Ball.png in Resources */ = {isa = PBXBuildFile; fileRef = B89DC88F13ABDB2D00224A01 /* Ball.png */; };
 		B89DCB1C13AD5A8300224A01 /* Block1.png in Resources */ = {isa = PBXBuildFile; fileRef = B89DCB1913AD5A8300224A01 /* Block1.png */; };
 		B89DCB1D13AD5A8300224A01 /* Block2.png in Resources */ = {isa = PBXBuildFile; fileRef = B89DCB1A13AD5A8300224A01 /* Block2.png */; };
 		B89DCB1E13AD5A8300224A01 /* Block3.png in Resources */ = {isa = PBXBuildFile; fileRef = B89DCB1B13AD5A8300224A01 /* Block3.png */; };
-		B8D6C10513BA2849005900A9 /* BJBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = B8D6C10413BA2849005900A9 /* BJBlocks.m */; };
+		B8E30A9413C305090071B193 /* BJCloud.m in Sources */ = {isa = PBXBuildFile; fileRef = B8E30A9313C305090071B193 /* BJCloud.m */; };
 		B8FA221713BB669A004E55A9 /* cloud1.png in Resources */ = {isa = PBXBuildFile; fileRef = B8FA221213BB669A004E55A9 /* cloud1.png */; };
 		B8FA221813BB669A004E55A9 /* cloud2.png in Resources */ = {isa = PBXBuildFile; fileRef = B8FA221313BB669A004E55A9 /* cloud2.png */; };
 		B8FA221913BB669A004E55A9 /* cloud3.png in Resources */ = {isa = PBXBuildFile; fileRef = B8FA221413BB669A004E55A9 /* cloud3.png */; };
@@ -495,12 +497,16 @@
 		B846517713B9F36900000027 /* BJBackgroundLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BJBackgroundLayer.m; sourceTree = "<group>"; };
 		B846517913B9F38A00000027 /* BJGameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BJGameLayer.h; sourceTree = "<group>"; };
 		B846517A13B9F38A00000027 /* BJGameLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BJGameLayer.mm; sourceTree = "<group>"; };
+		B89C12F613C2F9060010DC41 /* BJBallLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BJBallLayer.h; sourceTree = "<group>"; };
+		B89C12F713C2F9060010DC41 /* BJBallLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BJBallLayer.mm; sourceTree = "<group>"; };
+		B89C12FA13C2F9190010DC41 /* BJCloudLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BJCloudLayer.h; sourceTree = "<group>"; };
+		B89C12FB13C2F9190010DC41 /* BJCloudLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BJCloudLayer.mm; sourceTree = "<group>"; };
 		B89DC88F13ABDB2D00224A01 /* Ball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Ball.png; sourceTree = "<group>"; };
 		B89DCB1913AD5A8300224A01 /* Block1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Block1.png; sourceTree = "<group>"; };
 		B89DCB1A13AD5A8300224A01 /* Block2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Block2.png; sourceTree = "<group>"; };
 		B89DCB1B13AD5A8300224A01 /* Block3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Block3.png; sourceTree = "<group>"; };
-		B8D6C10313BA2849005900A9 /* BJBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BJBlocks.h; path = Ball.xcodeproj/BJBlocks.h; sourceTree = SOURCE_ROOT; };
-		B8D6C10413BA2849005900A9 /* BJBlocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BJBlocks.m; path = Ball.xcodeproj/BJBlocks.m; sourceTree = SOURCE_ROOT; };
+		B8E30A9213C305080071B193 /* BJCloud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BJCloud.h; sourceTree = "<group>"; };
+		B8E30A9313C305090071B193 /* BJCloud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BJCloud.m; sourceTree = "<group>"; };
 		B8FA221213BB669A004E55A9 /* cloud1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloud1.png; sourceTree = "<group>"; };
 		B8FA221313BB669A004E55A9 /* cloud2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloud2.png; sourceTree = "<group>"; };
 		B8FA221413BB669A004E55A9 /* cloud3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloud3.png; sourceTree = "<group>"; };
@@ -572,12 +578,16 @@
 				B846510013B9F15B00000027 /* BJGameController.mm */,
 				B846517913B9F38A00000027 /* BJGameLayer.h */,
 				B846517A13B9F38A00000027 /* BJGameLayer.mm */,
+				B89C12F613C2F9060010DC41 /* BJBallLayer.h */,
+				B89C12F713C2F9060010DC41 /* BJBallLayer.mm */,
+				B89C12FA13C2F9190010DC41 /* BJCloudLayer.h */,
+				B89C12FB13C2F9190010DC41 /* BJCloudLayer.mm */,
+				B8E30A9213C305080071B193 /* BJCloud.h */,
+				B8E30A9313C305090071B193 /* BJCloud.m */,
 				B846517613B9F36900000027 /* BJBackgroundLayer.h */,
 				B846517713B9F36900000027 /* BJBackgroundLayer.m */,
 				B8FA222813BB71C9004E55A9 /* BJGameOverLayer.h */,
 				B8FA222913BB71C9004E55A9 /* BJGameOverLayer.m */,
-				B8D6C10313BA2849005900A9 /* BJBlocks.h */,
-				B8D6C10413BA2849005900A9 /* BJBlocks.m */,
 				B80235BD13A62AAD00BF29FC /* HelloWorldLayer.h */,
 				B80235BE13A62AAD00BF29FC /* HelloWorldLayer.mm */,
 				B80235C013A62AAD00BF29FC /* GLES-Render.h */,
@@ -1275,8 +1285,10 @@
 				B846510113B9F15B00000027 /* BJGameController.mm in Sources */,
 				B846517813B9F36A00000027 /* BJBackgroundLayer.m in Sources */,
 				B846517B13B9F38B00000027 /* BJGameLayer.mm in Sources */,
-				B8D6C10513BA2849005900A9 /* BJBlocks.m in Sources */,
 				B8FA222A13BB71C9004E55A9 /* BJGameOverLayer.m in Sources */,
+				B89C12F813C2F9060010DC41 /* BJBallLayer.mm in Sources */,
+				B89C12FC13C2F9190010DC41 /* BJCloudLayer.mm in Sources */,
+				B8E30A9413C305090071B193 /* BJCloud.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,8 +1,8 @@
 //
-//  BJGameLayer.h
+//  BJCloudLayer.h
 //  Ball
 //
-//  Created by Akifumi Fukaya on 11/06/28.
+//  Created by Akifumi Fukaya on 11/07/05.
 //  Copyright 2011 Keio University. All rights reserved.
 //
 
@@ -12,8 +12,8 @@
 #import "GLES-Render.h"
 
 
-@interface BJGameLayer : CCLayer {
-
+@interface BJCloudLayer : CCLayer {
+    
     b2World* world;
     GLESDebugDraw *m_debugDraw;
     
