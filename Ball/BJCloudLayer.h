@@ -14,13 +14,15 @@
 
 @interface BJCloudLayer : CCLayer {
     
-    b2World* world;
+    b2World* _world;
     GLESDebugDraw *m_debugDraw;
     
     int termNum;
-    b2Body *bodyBlock;
+    b2Body *cloudBody[7];
     
 }
++ (id)layer:(b2World *)world;
+- (id)initWithWorld:(b2World *)world;
 + (id)node;
 -(void) addFirstBlock;
 -(void) addNewObject:(int)count Term:(int)term;
