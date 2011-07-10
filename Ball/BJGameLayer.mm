@@ -41,10 +41,7 @@ enum {
     self = [super init];
     
     if (self) {
-        srand(time(NULL));
-        
-        self.isAccelerometerEnabled = YES;
-        
+
         cloud.interval = 0;
         termNum = 0;
         
@@ -80,11 +77,11 @@ enum {
 		b2PolygonShape groundBox;		
 		
 //        // bottom
-//        groundBox.SetAsEdge(b2Vec2(0,-screenSize.height/PTM_RATIO), b2Vec2(screenSize.width/PTM_RATIO,-screenSize.height/PTM_RATIO));
+//        groundBox.SetAsEdge(b2Vec2(0, 0), b2Vec2(screenSize.width/PTM_RATIO, 0));
 //        groundBody->CreateFixture(&groundBox,0);
 //		
 //        // top
-//        groundBox.SetAsEdge(b2Vec2(0,screenSize.height/PTM_RATIO*2), b2Vec2(screenSize.width/PTM_RATIO,screenSize.height/PTM_RATIO*2));
+//        groundBox.SetAsEdge(b2Vec2(0,screenSize.height/PTM_RATIO), b2Vec2(screenSize.width/PTM_RATIO,screenSize.height/PTM_RATIO));
 //        groundBody->CreateFixture(&groundBox,0);
 		
 		// left
@@ -99,102 +96,102 @@ enum {
         self.ballLayer = [BJBallLayer layer:world];
         [self addChild:ballLayer];
         
-//        self.cloudLayer = [BJCloudLayer layer:world];
-//        [self addChild:self.cloudLayer];
+        self.cloudLayer = [BJCloudLayer layer:world];
+        [self addChild:self.cloudLayer];
         
 //        [self.cloudLayer addFirstCloud:world];
         
-        [self addFirstBlock];
+//        [self addFirstBlock];
         [self schedule: @selector(tick:)];  
     }
     return self;
 }
 
--(void) addFirstBlock{
-    CCSprite *obj;
-    cloud = [BJCloud new];
-    cloud.imageNum = rand()%3 + 1;
-    if (cloud.imageNum == 1) {
-        obj = [CCSprite spriteWithFile:@"cloud1.png"];
-        [self addChild:obj z:1];
-    }
- 	if (cloud.imageNum == 2) {
-        obj = [CCSprite spriteWithFile:@"cloud2.png"];
-        [self addChild:obj z:1];
-    }
-    if (cloud.imageNum == 3) {
-        obj = [CCSprite spriteWithFile:@"cloud3.png"];
-        [self addChild:obj z:1];
-    }
-    if (cloud.imageNum == 4) {
-        obj = [CCSprite spriteWithFile:@"cloud4.png"];
-        [self addChild:obj z:1];
-    }
-    
-    cloud.width = obj.contentSize.width;
-    cloud.height = obj.contentSize.height;
-    cloud.currentPosX = 320/2;
-    cloud.currentPosY = 0;
-    
-    b2BodyDef bodyDefBlock;
-    bodyDefBlock.type = b2_staticBody;
-    bodyDefBlock.userData = obj;
-    bodyDefBlock.position.Set(cloud.currentPosX/PTM_RATIO, cloud.currentPosY/PTM_RATIO);
-    bodyBlock = world->CreateBody(&bodyDefBlock);
-    b2PolygonShape shape;
-    shape.SetAsBox((obj.contentSize.width/2 - 5)/PTM_RATIO, (obj.contentSize.height/2 - 15)/PTM_RATIO, b2Vec2(0, 0), 0.0f);
-    
-    CCMoveBy *move = [CCMoveBy actionWithDuration:10 
-                                         position:ccp(0, 480)];
-    [self runAction:[CCRepeatForever actionWithAction:move]];
-    bodyBlock->CreateFixture(&shape, 0.0f);
-    
-    cloud.currentPosY = bodyBlock->GetPosition().y * PTM_RATIO;
-}
-
--(void) addNewObject:(int)count Term:(int)term{
-    
-    CCSprite *obj;
-    cloud = [BJCloud new];
-    cloud.imageNum = rand()%4 + 1;
-    cloud.moveIntervalPosY = 1.0;
-    if (cloud.imageNum == 1) {
-        obj = [CCSprite spriteWithFile:@"cloud1.png"];
-        [self addChild:obj z:1];
-    }
- 	if (cloud.imageNum == 2) {
-        obj = [CCSprite spriteWithFile:@"cloud2.png"];
-        [self addChild:obj z:1];
-    }
-    if (cloud.imageNum == 3) {
-        obj = [CCSprite spriteWithFile:@"cloud3.png"];
-        [self addChild:obj z:1];
-    }
-    if (cloud.imageNum == 4) {
-        obj = [CCSprite spriteWithFile:@"cloud4.png"];
-        [self addChild:obj z:1];
-    }
-    
-    cloud.width = obj.contentSize.width;
-    cloud.height = obj.contentSize.height;
-    cloud.currentPosX = rand()%320;
-    cloud.currentPosY = -480/6*count -480*term;
-        
-    b2BodyDef bodyDefBlock;
-    bodyDefBlock.type = b2_staticBody;
-    bodyDefBlock.userData = obj;
-    bodyDefBlock.position.Set(cloud.currentPosX/PTM_RATIO, cloud.currentPosY/PTM_RATIO);
-    bodyBlock = world->CreateBody(&bodyDefBlock);
-    b2PolygonShape shape;
-    shape.SetAsBox((obj.contentSize.width/2 - 5)/PTM_RATIO, (obj.contentSize.height/2 - 15)/PTM_RATIO, b2Vec2(0, 0), 0.0f);
-
-    CCMoveBy *move = [CCMoveBy actionWithDuration:10 
-                                                     position:ccp(0, 480)];
-    [self runAction:[CCRepeatForever actionWithAction:move]];
-    bodyBlock->CreateFixture(&shape, 0.0f);
-    
-    cloud.currentPosY = bodyBlock->GetPosition().y * PTM_RATIO;
-}
+//-(void) addFirstBlock{
+//    CCSprite *obj;
+//    cloud = [BJCloud new];
+//    cloud.imageNum = rand()%3 + 1;
+//    if (cloud.imageNum == 1) {
+//        obj = [CCSprite spriteWithFile:@"cloud1.png"];
+//        [self addChild:obj z:1];
+//    }
+// 	if (cloud.imageNum == 2) {
+//        obj = [CCSprite spriteWithFile:@"cloud2.png"];
+//        [self addChild:obj z:1];
+//    }
+//    if (cloud.imageNum == 3) {
+//        obj = [CCSprite spriteWithFile:@"cloud3.png"];
+//        [self addChild:obj z:1];
+//    }
+//    if (cloud.imageNum == 4) {
+//        obj = [CCSprite spriteWithFile:@"cloud4.png"];
+//        [self addChild:obj z:1];
+//    }
+//    
+//    cloud.width = obj.contentSize.width;
+//    cloud.height = obj.contentSize.height;
+//    cloud.currentPosX = 320/2;
+//    cloud.currentPosY = 0;
+//    
+//    b2BodyDef bodyDefBlock;
+//    bodyDefBlock.type = b2_staticBody;
+//    bodyDefBlock.userData = obj;
+//    bodyDefBlock.position.Set(cloud.currentPosX/PTM_RATIO, cloud.currentPosY/PTM_RATIO);
+//    bodyBlock = world->CreateBody(&bodyDefBlock);
+//    b2PolygonShape shape;
+//    shape.SetAsBox((obj.contentSize.width/2 - 5)/PTM_RATIO, (obj.contentSize.height/2 - 15)/PTM_RATIO, b2Vec2(0, 0), 0.0f);
+//    
+//    CCMoveBy *move = [CCMoveBy actionWithDuration:10 
+//                                         position:ccp(0, 480)];
+//    [self runAction:[CCRepeatForever actionWithAction:move]];
+//    bodyBlock->CreateFixture(&shape, 0.0f);
+//    
+//    cloud.currentPosY = bodyBlock->GetPosition().y * PTM_RATIO;
+//}
+//
+//-(void) addNewObject:(int)count Term:(int)term{
+//    
+//    CCSprite *obj;
+//    cloud = [BJCloud new];
+//    cloud.imageNum = rand()%4 + 1;
+//    cloud.moveIntervalPosY = 1.0;
+//    if (cloud.imageNum == 1) {
+//        obj = [CCSprite spriteWithFile:@"cloud1.png"];
+//        [self addChild:obj z:1];
+//    }
+// 	if (cloud.imageNum == 2) {
+//        obj = [CCSprite spriteWithFile:@"cloud2.png"];
+//        [self addChild:obj z:1];
+//    }
+//    if (cloud.imageNum == 3) {
+//        obj = [CCSprite spriteWithFile:@"cloud3.png"];
+//        [self addChild:obj z:1];
+//    }
+//    if (cloud.imageNum == 4) {
+//        obj = [CCSprite spriteWithFile:@"cloud4.png"];
+//        [self addChild:obj z:1];
+//    }
+//    
+//    cloud.width = obj.contentSize.width;
+//    cloud.height = obj.contentSize.height;
+//    cloud.currentPosX = rand()%320;
+//    cloud.currentPosY = -480/6*count -480*term;
+//        
+//    b2BodyDef bodyDefBlock;
+//    bodyDefBlock.type = b2_staticBody;
+//    bodyDefBlock.userData = obj;
+//    bodyDefBlock.position.Set(cloud.currentPosX/PTM_RATIO, cloud.currentPosY/PTM_RATIO);
+//    bodyBlock = world->CreateBody(&bodyDefBlock);
+//    b2PolygonShape shape;
+//    shape.SetAsBox((obj.contentSize.width/2 - 5)/PTM_RATIO, (obj.contentSize.height/2 - 15)/PTM_RATIO, b2Vec2(0, 0), 0.0f);
+//
+//    CCMoveBy *move = [CCMoveBy actionWithDuration:10 
+//                                                     position:ccp(0, 480)];
+//    [self runAction:[CCRepeatForever actionWithAction:move]];
+//    bodyBlock->CreateFixture(&shape, 0.0f);
+//    
+//    cloud.currentPosY = bodyBlock->GetPosition().y * PTM_RATIO;
+//}
 //
 //-(void) draw
 //{
@@ -238,13 +235,13 @@ enum {
         }
     }
     
-    if (cloud.interval % 600 == 0) {
-        for (int i = 1; i < 7; i++) {
-            [self addNewObject:i Term:termNum];
-        }
-        termNum++;
-    }
-    cloud.interval++;
+//    if (cloud.interval % 600 == 0) {
+//        for (int i = 1; i < 7; i++) {
+//            [self addNewObject:i Term:termNum];
+//        }
+//        termNum++;
+//    }
+//    cloud.interval++;
     
 //    if (bodyBall->GetPosition().y*PTM_RATIO>(480-480.0/600*block.interval*termNum) || 
 //        bodyBall->GetPosition().y*PTM_RATIO<(-30/2-480.0/600*block.interval*(termNum)    )) {
@@ -257,24 +254,6 @@ enum {
 //            self.flag = YES;
 //        }
 //    }
-}
-
-- (void)accelerometer:(UIAccelerometer*)accelerometer didAccelerate:(UIAcceleration*)acceleration
-{	
-	static float prevX=0;
-	
-	//#define kFilterFactor 0.05f
-#define kFilterFactor 1.0f	// don't use filter. the code is here just as an example
-	
-	float accelX = (float) acceleration.x * kFilterFactor + (1- kFilterFactor)*prevX;
-	
-	prevX = accelX;
-	
-	// accelerometer values are in "Portrait" mode. Change them to Landscape left
-	// multiply the gravity by 10
-	b2Vec2 gravity( accelX * 10, -10.0f);
-	
-	world->SetGravity( gravity );
 }
 
 // on "dealloc" you need to release all your retained objects

@@ -10,5 +10,5 @@
 
 
 @implementation BJCloud
-@synthesize currentPosX, currentPosY, nextPosX, nextPosY, width, height, imageNum, interval, moveIntervalPosY;
+@synthesize currentPosX, currentPosY, nextPosX, nextPosY, width, height, imageNum, interval, count;
 @end
