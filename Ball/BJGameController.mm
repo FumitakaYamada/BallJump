@@ -25,8 +25,8 @@
         self.mainScene = [CCScene node];
         
         [self.mainScene addChild:[BJBackgroundLayer node] z:BJLayerZBackground];
-//        [self.mainScene addChild:[BJGameLayer node] z:BJLayerZMain];
-        [self.mainScene addChild:[BJCloudLayer node] z:BJLayerZMain];
+        [self.mainScene addChild:[BJGameLayer node] z:BJLayerZMain];
+//        [self.mainScene addChild:[BJCloudLayer node] z:BJLayerZMain];
         
         BJGameOverLayer *gameScore = [BJGameOverLayer new];
         NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
