@@ -119,7 +119,6 @@ enum {
 	// generally best to keep the time step and iterations fixed.
 	world->Step(dt, velocityIterations, positionIterations);
 	//Iterate over the bodies in the physics world
-//    [cloudLayer moveB2Object:world];
     for (b2Body* b = world->GetBodyList(); b; b = b->GetNext())
 	{
         if (b->GetUserData() != NULL) {
@@ -152,6 +151,9 @@ enum {
 
 - (void)gameOver{
     [self removeChild:ballLayer cleanup:YES];
+//    NSDictionary *dic = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%d", score] forKey:@"KEY"];
+    NSNotification *n = [NSNotification notificationWithName:@"GameOver" object:self userInfo:NULL];
+    [[NSNotificationCenter defaultCenter] postNotification:n];
 }
 
 // on "dealloc" you need to release all your retained objects

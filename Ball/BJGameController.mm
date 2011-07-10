@@ -33,10 +33,8 @@
         [self.mainScene addChild:[BJBackgroundLayer node] z:BJLayerZBackground];
         [self.mainScene addChild:[BJGameLayer node] z:BJLayerZMain];
         
-        BJGameOverLayer *gameScore = [BJGameOverLayer new];
         NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
         [nc addObserver:self selector:@selector(gameOverLayer) name:@"GameOver" object:nil];
-        [nc addObserver:gameScore selector:@selector(getScore:) name:@"GameOver" object:nil];
 
         [[CCDirector sharedDirector] runWithScene:self.mainScene];
 
@@ -45,7 +43,8 @@
 }
 
 - (void)gameOverLayer{
-    [self.mainScene addChild:[BJGameOverLayer node] z:BJLayerZGameOver];
+    int score = 100;
+    [self.mainScene addChild:[BJGameOverLayer layer:score] z:BJLayerZGameOver];
 }
 
 @end

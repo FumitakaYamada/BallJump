@@ -17,11 +17,11 @@
 @implementation BJGameOverLayer
 @synthesize resultScoreLabel, resultScoreNum, x, y;
 
-+ (id)node {
-    return [[[BJGameOverLayer alloc] init] autorelease];
++ (id)layer:(int)score{
+    return [[[BJGameOverLayer alloc] initWithScore:score] autorelease];
 }
 
-- (id)init {
+- (id)initWithScore:(int)score{
     self = [super init];
     if (self) {
         self.resultScoreLabel = [CCLabelTTF labelWithString:@"Score:" fontName:@"Arial" fontSize:32];
@@ -30,6 +30,8 @@
         [self.resultScoreLabel setPosition: ccp(200, 110)];
         
         self.resultScoreNum = [CCLabelTTF labelWithString:@"0" fontName:@"Arial" fontSize:32];
+        NSString *scoreStr = [NSString stringWithFormat:@"%d", score];
+        [self.resultScoreNum setString:[NSString stringWithFormat:@"%@", scoreStr]];
         self.resultScoreNum.color = ccc3(255, 0, 0);
         [self.resultScoreNum setPosition: ccp(280, 110)];
         [self addChild:self.resultScoreNum z:1];
@@ -39,10 +41,9 @@
     return self;
 }
 
-- (void)getScore:(NSNotification *)nortification{
-    NSString *score = [[nortification userInfo] objectForKey:@"KEY"];
-    NSLog(@"%@", score);
-    [self.resultScoreNum setString:[NSString stringWithFormat:@"%@", score]];
-}
+//- (void)getScore:(NSNotification *)nortification{
+//    NSString *score = [[nortification userInfo] objectForKey:@"KEY"];
+//    NSLog(@"%@", score);
+//}
 
 @end

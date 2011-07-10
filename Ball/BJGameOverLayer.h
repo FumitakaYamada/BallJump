@@ -17,5 +17,6 @@
 }
 @property int x, y;
 @property (nonatomic, retain) CCLabelTTF *resultScoreNum;
-+ (id)node;
++ (id)layer:(int)score;
+- (id)initWithScore:(int)score;
 @end
