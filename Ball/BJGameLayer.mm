@@ -33,7 +33,7 @@ enum {
 @synthesize cloud;
 @synthesize flag;
 
-+ (id)node{
++ (id)layer{
     return [[[BJGameLayer alloc] init] autorelease];
 }
 

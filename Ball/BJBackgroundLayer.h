@@ -10,5 +10,5 @@
 #import "cocos2d.h"
 
 @interface BJBackgroundLayer : CCLayer
-+ (id)node;
++ (id)layer;
 @end

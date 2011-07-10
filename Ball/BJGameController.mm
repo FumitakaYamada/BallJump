@@ -30,8 +30,8 @@
     if (self) {
         self.mainScene = [CCScene node];
         
-        [self.mainScene addChild:[BJBackgroundLayer node] z:BJLayerZBackground];
-        [self.mainScene addChild:[BJGameLayer node] z:BJLayerZMain];
+        [self.mainScene addChild:[BJBackgroundLayer layer] z:BJLayerZBackground];
+        [self.mainScene addChild:[BJGameLayer layer] z:BJLayerZMain];
         
         NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
         [nc addObserver:self selector:@selector(gameOverLayer) name:@"GameOver" object:nil];

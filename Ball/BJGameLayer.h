@@ -21,5 +21,5 @@
     b2Body *bodyBlock;
     
 }
-+ (id)node;
++ (id)layer;
 @end

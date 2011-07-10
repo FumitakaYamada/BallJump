@@ -17,7 +17,11 @@
 @synthesize background1;
 @synthesize background2;
 
-- (id)init {
++ (id)layer{
+    return [[[BJBackgroundLayer alloc] init] autorelease];
+}
+
+- (id)init{
     self = [super init];
     if (self) {
         CGSize screenSize = [CCDirector sharedDirector].winSize;
@@ -38,7 +42,4 @@
     return self;
 }
 
-+ (id)node {
-    return [[[BJBackgroundLayer alloc] init] autorelease];
-}
 @end
