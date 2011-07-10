@@ -12,8 +12,14 @@
 #import "BJCloudLayer.h"
 #import "BJGameOverLayer.h"
 
+
+@interface BJGameController()
+@property (nonatomic, retain) BJBallLayer *ballLayer;
+@end
+
 @implementation BJGameController
 @synthesize mainScene;
+@synthesize ballLayer;
 
 + (BJGameController *)controller {
     return [[[BJGameController alloc] init] autorelease];
@@ -26,7 +32,6 @@
         
         [self.mainScene addChild:[BJBackgroundLayer node] z:BJLayerZBackground];
         [self.mainScene addChild:[BJGameLayer node] z:BJLayerZMain];
-//        [self.mainScene addChild:[BJCloudLayer node] z:BJLayerZMain];
         
         BJGameOverLayer *gameScore = [BJGameOverLayer new];
         NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
@@ -34,6 +39,7 @@
         [nc addObserver:gameScore selector:@selector(getScore:) name:@"GameOver" object:nil];
 
         [[CCDirector sharedDirector] runWithScene:self.mainScene];
+
     }
     return self;
 }

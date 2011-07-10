@@ -43,7 +43,6 @@ enum {
     if (self) {
 
         cloud.interval = 0;
-        termNum = 0;
         
         CGSize screenSize = [CCDirector sharedDirector].winSize;
 
@@ -96,6 +95,8 @@ enum {
         self.ballLayer = [BJBallLayer layer:world];
         [self addChild:ballLayer];
         
+        ballLayer.delegate = self;
+        
         self.cloudLayer = [BJCloudLayer layer:world];
         [self addChild:self.cloudLayer];
         
@@ -147,6 +148,10 @@ enum {
 //            self.flag = YES;
 //        }
 //    }
+}
+
+- (void)gameOver{
+    [self removeChild:ballLayer cleanup:YES];
 }
 
 // on "dealloc" you need to release all your retained objects

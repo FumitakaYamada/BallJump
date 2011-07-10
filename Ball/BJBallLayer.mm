@@ -11,11 +11,18 @@
 #define PTM_RATIO 32
 
 
+@interface BJBallLayer()
+@property (nonatomic, retain) CCSprite *player;
+@end
+
 @implementation BJBallLayer
+@synthesize delegate = _delegate;
+@synthesize player;
 
 + (id)layer:(b2World *)world{
     return [[[BJBallLayer alloc] initWithWorld:world] autorelease];
 }
+
 - (id)initWithWorld:(b2World *)world{
     if ((self = [super init])) {
         
@@ -25,19 +32,19 @@
     
         CGSize screenSize = [CCDirector sharedDirector].winSize;
 
-        CCSprite *ball = [CCSprite spriteWithFile:@"object1.png"];
-        [self addChild:ball];
+        player = [CCSprite spriteWithFile:@"object1.png"];
+        [self addChild:player];
         
         int ballPosX = screenSize.width/2;
-        int ballPosY = screenSize.height - ball.contentSize.height/2;
-        ball.position = ccp(ballPosX, ballPosY);
+        int ballPosY = screenSize.height - player.contentSize.height/2;
+        player.position = ccp(ballPosX, ballPosY);
         
-        b2BodyDef bodyDef;
-        bodyDef.type = b2_dynamicBody;
-        bodyDef.position.Set(ballPosX/PTM_RATIO, ballPosY/PTM_RATIO);
-        bodyDef.userData = ball;
-        bodyBall = _world->CreateBody(&bodyDef);
-        NSLog(@"%@", bodyBall->GetUserData());
+        b2BodyDef playerBodyDef;
+        playerBodyDef.type = b2_dynamicBody;
+        playerBodyDef.position.Set(ballPosX/PTM_RATIO, ballPosY/PTM_RATIO);
+        playerBodyDef.userData = player;
+        ballBody = _world->CreateBody(&playerBodyDef);
+        NSLog(@"%@", ballBody->GetUserData());
         b2CircleShape circle;
         circle.m_radius = 0.45f;
         
@@ -46,15 +53,24 @@
         fixtureDef.density = 0.5f;  // 鞫ｩ謫ｦ
         fixtureDef.friction = 0.3;  // 鞫ｩ謫ｦ
         fixtureDef.restitution = 0.8f;  // 霍ｳ縺ｭ霑斐ｊ
-        bodyBall->CreateFixture(&fixtureDef);        
+        ballBody->CreateFixture(&fixtureDef);
+        
+        [self schedule:@selector(checkGameOver:)];
 
-//        _world = NULL;
+        _world = NULL;
     }
     return self;
 }
 
-- (void)checkGameOver{
 
+
+- (void)checkGameOver:(ccTime)dt{
+    float playerPosY = ballBody->GetPosition().y*PTM_RATIO;
+    if (playerPosY > 480 + player.contentSize.width/2 || playerPosY < 0 - player.contentSize.width/2) {
+        if ([_delegate respondsToSelector:@selector(gameOver)]) {
+            [_delegate gameOver];
+        }
+    }
 }
 
 - (void)accelerometer:(UIAccelerometer*)accelerometer didAccelerate:(UIAcceleration*)acceleration
@@ -71,7 +87,7 @@
 	// accelerometer values are in "Portrait" mode. Change them to Landscape left
 	// multiply the gravity by 10
 //	b2Vec2 gravity( accelX * 10, 0.0f);
-    bodyBall->ApplyForce(b2Vec2(accelX * 20, -10.0f), bodyBall->GetPosition());
+    ballBody->ApplyForce(b2Vec2(accelX * 20, -10.0f), ballBody->GetPosition());
 
 //	_world->SetGravity( gravity );
 }

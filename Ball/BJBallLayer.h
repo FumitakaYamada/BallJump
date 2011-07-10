@@ -11,13 +11,19 @@
 #import "Box2D.h"
 #import "GLES-Render.h"
 
+@protocol BJBallLayerDelegate <NSObject>
+- (void)gameOver;
+@end
+
 @interface BJBallLayer : CCLayer {
     
     b2World *_world;
-    b2Body *bodyBall;
+    b2Body *ballBody;
+    
+    id <BJBallLayerDelegate> _delegate;
     
 }
+@property (nonatomic, retain) id <BJBallLayerDelegate> delegate;
 + (id)layer:(b2World *)world;
 - (id)initWithWorld:(b2World *)world;
-- (void)checkGameOver;
 @end

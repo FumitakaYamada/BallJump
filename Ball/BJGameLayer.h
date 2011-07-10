@@ -10,14 +10,14 @@
 #import "cocos2d.h"
 #import "Box2D.h"
 #import "GLES-Render.h"
+#import "BJBallLayer.h"
 
 
-@interface BJGameLayer : CCLayer {
+@interface BJGameLayer : CCLayer <BJBallLayerDelegate> {
 
     b2World* world;
     GLESDebugDraw *m_debugDraw;
     
-    int termNum;
     b2Body *bodyBlock;
     
 }
