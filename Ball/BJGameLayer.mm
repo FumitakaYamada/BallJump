@@ -85,11 +85,11 @@ enum {
 //        groundBody->CreateFixture(&groundBox,0);
 		
 		// left
-		groundBox.SetAsEdge(b2Vec2(0,screenSize.height/PTM_RATIO*2), b2Vec2(0,-screenSize.height/PTM_RATIO*100));
+		groundBox.SetAsEdge(b2Vec2(0,screenSize.height/PTM_RATIO*2), b2Vec2(0,-screenSize.height/PTM_RATIO));
 		groundBody->CreateFixture(&groundBox,0);
 		
 		// right
-		groundBox.SetAsEdge(b2Vec2(screenSize.width/PTM_RATIO,screenSize.height/PTM_RATIO*2), b2Vec2(screenSize.width/PTM_RATIO,-screenSize.height/PTM_RATIO*100));
+		groundBox.SetAsEdge(b2Vec2(screenSize.width/PTM_RATIO,screenSize.height/PTM_RATIO*2), b2Vec2(screenSize.width/PTM_RATIO,-screenSize.height/PTM_RATIO));
 		groundBody->CreateFixture(&groundBox,0);
 /*===================================================================================================*/		
         
@@ -99,117 +99,10 @@ enum {
         self.cloudLayer = [BJCloudLayer layer:world];
         [self addChild:self.cloudLayer];
         
-//        [self.cloudLayer addFirstCloud:world];
-        
-//        [self addFirstBlock];
         [self schedule: @selector(tick:)];  
     }
     return self;
 }
-
-//-(void) addFirstBlock{
-//    CCSprite *obj;
-//    cloud = [BJCloud new];
-//    cloud.imageNum = rand()%3 + 1;
-//    if (cloud.imageNum == 1) {
-//        obj = [CCSprite spriteWithFile:@"cloud1.png"];
-//        [self addChild:obj z:1];
-//    }
-// 	if (cloud.imageNum == 2) {
-//        obj = [CCSprite spriteWithFile:@"cloud2.png"];
-//        [self addChild:obj z:1];
-//    }
-//    if (cloud.imageNum == 3) {
-//        obj = [CCSprite spriteWithFile:@"cloud3.png"];
-//        [self addChild:obj z:1];
-//    }
-//    if (cloud.imageNum == 4) {
-//        obj = [CCSprite spriteWithFile:@"cloud4.png"];
-//        [self addChild:obj z:1];
-//    }
-//    
-//    cloud.width = obj.contentSize.width;
-//    cloud.height = obj.contentSize.height;
-//    cloud.currentPosX = 320/2;
-//    cloud.currentPosY = 0;
-//    
-//    b2BodyDef bodyDefBlock;
-//    bodyDefBlock.type = b2_staticBody;
-//    bodyDefBlock.userData = obj;
-//    bodyDefBlock.position.Set(cloud.currentPosX/PTM_RATIO, cloud.currentPosY/PTM_RATIO);
-//    bodyBlock = world->CreateBody(&bodyDefBlock);
-//    b2PolygonShape shape;
-//    shape.SetAsBox((obj.contentSize.width/2 - 5)/PTM_RATIO, (obj.contentSize.height/2 - 15)/PTM_RATIO, b2Vec2(0, 0), 0.0f);
-//    
-//    CCMoveBy *move = [CCMoveBy actionWithDuration:10 
-//                                         position:ccp(0, 480)];
-//    [self runAction:[CCRepeatForever actionWithAction:move]];
-//    bodyBlock->CreateFixture(&shape, 0.0f);
-//    
-//    cloud.currentPosY = bodyBlock->GetPosition().y * PTM_RATIO;
-//}
-//
-//-(void) addNewObject:(int)count Term:(int)term{
-//    
-//    CCSprite *obj;
-//    cloud = [BJCloud new];
-//    cloud.imageNum = rand()%4 + 1;
-//    cloud.moveIntervalPosY = 1.0;
-//    if (cloud.imageNum == 1) {
-//        obj = [CCSprite spriteWithFile:@"cloud1.png"];
-//        [self addChild:obj z:1];
-//    }
-// 	if (cloud.imageNum == 2) {
-//        obj = [CCSprite spriteWithFile:@"cloud2.png"];
-//        [self addChild:obj z:1];
-//    }
-//    if (cloud.imageNum == 3) {
-//        obj = [CCSprite spriteWithFile:@"cloud3.png"];
-//        [self addChild:obj z:1];
-//    }
-//    if (cloud.imageNum == 4) {
-//        obj = [CCSprite spriteWithFile:@"cloud4.png"];
-//        [self addChild:obj z:1];
-//    }
-//    
-//    cloud.width = obj.contentSize.width;
-//    cloud.height = obj.contentSize.height;
-//    cloud.currentPosX = rand()%320;
-//    cloud.currentPosY = -480/6*count -480*term;
-//        
-//    b2BodyDef bodyDefBlock;
-//    bodyDefBlock.type = b2_staticBody;
-//    bodyDefBlock.userData = obj;
-//    bodyDefBlock.position.Set(cloud.currentPosX/PTM_RATIO, cloud.currentPosY/PTM_RATIO);
-//    bodyBlock = world->CreateBody(&bodyDefBlock);
-//    b2PolygonShape shape;
-//    shape.SetAsBox((obj.contentSize.width/2 - 5)/PTM_RATIO, (obj.contentSize.height/2 - 15)/PTM_RATIO, b2Vec2(0, 0), 0.0f);
-//
-//    CCMoveBy *move = [CCMoveBy actionWithDuration:10 
-//                                                     position:ccp(0, 480)];
-//    [self runAction:[CCRepeatForever actionWithAction:move]];
-//    bodyBlock->CreateFixture(&shape, 0.0f);
-//    
-//    cloud.currentPosY = bodyBlock->GetPosition().y * PTM_RATIO;
-//}
-//
-//-(void) draw
-//{
-//	// Default GL states: GL_TEXTURE_2D, GL_VERTEX_ARRAY, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
-//	// Needed states:  GL_VERTEX_ARRAY, 
-//	// Unneeded states: GL_TEXTURE_2D, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
-//	glDisable(GL_TEXTURE_2D);
-//	glDisableClientState(GL_COLOR_ARRAY);
-//	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-//	
-//	world->DrawDebugData();
-//	
-//	// restore default GL states
-//	glEnable(GL_TEXTURE_2D);
-//	glEnableClientState(GL_COLOR_ARRAY);
-//	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-//    
-//}
 
 -(void) tick: (ccTime) dt
 {
