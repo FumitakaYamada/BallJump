@@ -45,7 +45,7 @@
         fixtureDef.shape = &circle;
         fixtureDef.density = 0.5f;  // 鞫ｩ謫ｦ
         fixtureDef.friction = 0.3;  // 鞫ｩ謫ｦ
-        fixtureDef.restitution = 0.5f;  // 霍ｳ縺ｭ霑斐ｊ
+        fixtureDef.restitution = 0.8f;  // 霍ｳ縺ｭ霑斐ｊ
         bodyBall->CreateFixture(&fixtureDef);        
 
 //        _world = NULL;

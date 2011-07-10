@@ -17,15 +17,12 @@
     b2World* _world;
     GLESDebugDraw *m_debugDraw;
     
-    int termNum;
-    b2Body *cloudBody[8];
+    b2Body *cloudBody[7];
     
     int cloudCount;
     
 }
 + (id)layer:(b2World *)world;
 - (id)initWithWorld:(b2World *)world;
-+ (id)node;
--(void) addFirstBlock;
--(void) addNewObject:(int)count Term:(int)term;
+- (void)addNewObject:(int)count;
 @end

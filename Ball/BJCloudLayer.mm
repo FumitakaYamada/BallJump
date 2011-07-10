@@ -35,9 +35,8 @@ enum {
 
 - (id)initWithWorld:(b2World *)world{
     if ((self = [super init])) {
-        
         srand(time(NULL));
-
+        
         _world = world;
         
         cloud.count = 0;
@@ -66,7 +65,7 @@ enum {
         cloud.width = cloudSprite.contentSize.width;
         cloud.height = cloudSprite.contentSize.height;
         cloud.currentPosX = 320/2;
-        cloud.currentPosY = 0;
+        cloud.currentPosY = -cloudSprite.contentSize.height/2;
         
         b2BodyDef cloudBodyDef;
         cloudBodyDef.type = b2_dynamicBody;
@@ -88,38 +87,40 @@ enum {
 
 -(void) addNewObject:(int)count{
     
-    CCSprite *obj;
+    srand(time(NULL));
+    
+    CCSprite *cloudSprite;
     cloud = [BJCloud new];
     cloud.imageNum = rand()%4 + 1;
     if (cloud.imageNum == 1) {
-        obj = [CCSprite spriteWithFile:@"cloud1.png"];
-        [self addChild:obj z:1];
+        cloudSprite = [CCSprite spriteWithFile:@"cloud1.png"];
+        [self addChild:cloudSprite z:1];
     }
  	if (cloud.imageNum == 2) {
-        obj = [CCSprite spriteWithFile:@"cloud2.png"];
-        [self addChild:obj z:1];
+        cloudSprite = [CCSprite spriteWithFile:@"cloud2.png"];
+        [self addChild:cloudSprite z:1];
     }
     if (cloud.imageNum == 3) {
-        obj = [CCSprite spriteWithFile:@"cloud3.png"];
-        [self addChild:obj z:1];
+        cloudSprite = [CCSprite spriteWithFile:@"cloud3.png"];
+        [self addChild:cloudSprite z:1];
     }
     if (cloud.imageNum == 4) {
-        obj = [CCSprite spriteWithFile:@"cloud4.png"];
-        [self addChild:obj z:1];
+        cloudSprite = [CCSprite spriteWithFile:@"cloud4.png"];
+        [self addChild:cloudSprite z:1];
     }
     
-    cloud.width = obj.contentSize.width;
-    cloud.height = obj.contentSize.height;
+    cloud.width = cloudSprite.contentSize.width;
+    cloud.height = cloudSprite.contentSize.height;
     cloud.currentPosX = rand()%320;
-    cloud.currentPosY = -obj.contentSize.height/2;
+    cloud.currentPosY = -cloudSprite.contentSize.height/2;
     
-    b2BodyDef bodyDefBlock;
-    bodyDefBlock.type = b2_dynamicBody;
-    bodyDefBlock.userData = obj;
-    bodyDefBlock.position.Set(cloud.currentPosX/PTM_RATIO, cloud.currentPosY/PTM_RATIO);
-    cloudBody[count] = _world->CreateBody(&bodyDefBlock);
+    b2BodyDef cloudbBodyDef;
+    cloudbBodyDef.type = b2_dynamicBody;
+    cloudbBodyDef.userData = cloudSprite;
+    cloudbBodyDef.position.Set(cloud.currentPosX/PTM_RATIO, cloud.currentPosY/PTM_RATIO);
+    cloudBody[count] = _world->CreateBody(&cloudbBodyDef);
     b2PolygonShape shape;
-    shape.SetAsBox((obj.contentSize.width/2 - 5)/PTM_RATIO, (obj.contentSize.height/2 - 15)/PTM_RATIO, b2Vec2(0, 0), 0.0f);
+    shape.SetAsBox((cloudSprite.contentSize.width/2 - 5)/PTM_RATIO, (cloudSprite.contentSize.height/2 - 15)/PTM_RATIO, b2Vec2(0, 0), 0.0f);
     
     cloudBody[count]->CreateFixture(&shape, 0.0f);
     
@@ -146,19 +147,37 @@ enum {
 
 - (void)moveCloud:(ccTime) dt
 {
-//    NSLog(@"%f", cloudBody->GetLinearVelocity().y);
     for (int i = 0; i <= cloudCount; i++) {
-        cloudBody[i]->SetLinearVelocity(b2Vec2(0.0, 5.0f));
-//        NSLog(@"%d", i);
-    }
-//    NSLog(@"x:%f, y:%f", cloudBody[0]->GetPosition().x*PTM_RATIO, cloudBody[0]->GetPosition().y*PTM_RATIO);
-    for (int i = 0; i <= cloudCount; i++) {
-        if (cloudBody[i]->GetPosition().y*PTM_RATIO > 480) {
-            b2Vec2 moveFoewardPlayer(rand()%320/PTM_RATIO, 0);
-            cloudBody[i]->SetTransform(moveFoewardPlayer, 0);
-            NSLog(@"x:%f, y:%f", cloudBody[i]->GetPosition().x, cloudBody[i]->GetPosition().y);
+        cloudBody[i]->SetLinearVelocity(b2Vec2(0.0, 2.5f));
+        if (cloudBody[i]->GetPosition().y*PTM_RATIO > 480 + cloud.height) {
+            float nextPosY = rand()%320/PTM_RATIO;
+            if (nextPosY < 40) {
+                b2Vec2 moveFoewardPlayer(nextPosY + 40/PTM_RATIO, -cloud.height*2/PTM_RATIO);
+                cloudBody[i]->SetTransform(moveFoewardPlayer, 0);
+            }else if (nextPosY > 280){
+                b2Vec2 moveFoewardPlayer(nextPosY - 40/PTM_RATIO, -cloud.height*2/PTM_RATIO);
+                cloudBody[i]->SetTransform(moveFoewardPlayer, 0);
+            }else {
+                b2Vec2 moveFoewardPlayer(nextPosY, -cloud.height*2/PTM_RATIO);
+                cloudBody[i]->SetTransform(moveFoewardPlayer, 0);
+            }
         }
     }
+//    for (int i = 0; i <= cloudCount; i++) {
+//        if (cloudBody[i]->GetPosition().y*PTM_RATIO > 480 + cloud.height) {
+//            float nextPosY = rand()%320/PTM_RATIO;
+//            if (nextPosY < 40) {
+//                b2Vec2 moveFoewardPlayer(nextPosY + 40/PTM_RATIO, -cloud.height*2/PTM_RATIO);
+//                cloudBody[i]->SetTransform(moveFoewardPlayer, 0);
+//            }else if (nextPosY > 280){
+//                b2Vec2 moveFoewardPlayer(nextPosY - 40/PTM_RATIO, -cloud.height*2/PTM_RATIO);
+//                cloudBody[i]->SetTransform(moveFoewardPlayer, 0);
+//            }else {
+//                b2Vec2 moveFoewardPlayer(nextPosY, -cloud.height*2/PTM_RATIO);
+//                cloudBody[i]->SetTransform(moveFoewardPlayer, 0);
+//            }
+//        }
+//    }
 //    cloudBody->ApplyForce(b2Vec2(0.0f, 18.0f), cloudBody->GetPosition());
 //    cloudBody->ApplyLinearImpulse(b2Vec2(0.0f, 3.0f), cloudBody->GetPosition());
 	//It is recommended that a fixed time step is used with Box2D for stability
@@ -182,13 +201,13 @@ enum {
 //			myAct.rotation = -1 * CC_RADIANS_TO_DEGREES(b->GetAngle());
 //        }
 //    }
-    if (cloud.interval % 40 == 39) {
-        if (cloudCount < 6) {
+    
+    if (cloud.interval % 75 == 74) {
+        if (cloudCount < 5) {
             cloudCount++;
+            NSLog(@"%d", cloudCount);
             [self addNewObject:cloudCount];
-//            cloudBody[cloud.count]->SetLinearVelocity(b2Vec2(0.0, 5.0f));        
         }
-        termNum++;
     }
     cloud.interval++;
 //    NSLog(@"%d", cloud.interval);
