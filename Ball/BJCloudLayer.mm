@@ -41,6 +41,7 @@ enum {
         _world = world;
         
         cloud.count = 0;
+        cloudCount = 0;
         
         CCSprite *cloudSprite;
         cloud = [BJCloud new];
@@ -76,92 +77,14 @@ enum {
         shape.SetAsBox((cloudSprite.contentSize.width/2 - 5)/PTM_RATIO, (cloudSprite.contentSize.height/2 - 15)/PTM_RATIO, b2Vec2(0, 0), 0.0f);
         b2FixtureDef cloudFixtureDef;
         cloudFixtureDef.shape = &shape;
-//        cloudFixtureDef.density = 0.0f;  // 鞫ｩ謫ｦ
-//        cloudFixtureDef.friction = 0.5;  // 鞫ｩ謫ｦ
-//        cloudFixtureDef.restitution = 0.5f;  // 霍ｳ縺ｭ霑斐ｊ
-        cloudBody[0]->CreateFixture(&cloudFixtureDef);
         
-//        CCMoveBy *move = [CCMoveBy actionWithDuration:10 
-//                                             position:ccp(0, 480)];
-//        [self runAction:[CCRepeatForever actionWithAction:move]];
         cloudBody[0]->CreateFixture(&shape, 0.0f);
-//        cloudBody->ApplyLinearImpulse(b2Vec2(0.0f, 5.0f), cloudBody->GetPosition());
+
         [self schedule:@selector(moveCloud:)];
 
     }
     return self;
 }
-//+ (id)node{
-//    return [[[BJCloudLayer alloc] init] autorelease];
-//}
-//
-//- (id)init{
-//    self = [super init];
-//    
-//    if (self) {
-//        srand(time(NULL));
-//        
-//        self.isAccelerometerEnabled = YES;
-//        
-//        cloud.interval = 0;
-//        termNum = 0;
-//        
-//        CGSize screenSize = [CCDirector sharedDirector].winSize;
-//        
-//        // Define the gravity vector.
-//		b2Vec2 gravity;
-//		gravity.Set(0.0f, -10.0f);
-//		bool doSleep = false;
-//		world = new b2World(gravity, doSleep);
-//		
-//		world->SetContinuousPhysics(true);
-//		
-//		// Debug Draw functions
-//		m_debugDraw = new GLESDebugDraw( PTM_RATIO );
-//		world->SetDebugDraw(m_debugDraw);
-//		
-//		uint32 flags = 0;
-//		flags += b2DebugDraw::e_shapeBit;
-//        //		flags += b2DebugDraw::e_jointBit;
-//        //		flags += b2DebugDraw::e_aabbBit;
-//        //		flags += b2DebugDraw::e_pairBit;
-//        //		flags += b2DebugDraw::e_centerOfMassBit;
-//		m_debugDraw->SetFlags(flags);		
-//		
-//        /*===================================================================================================*/		
-//		// Define the ground body.
-//		b2BodyDef groundBodyDef;
-//		groundBodyDef.position.Set(0, 0); // bottom-left corner
-//		b2Body* groundBody = world->CreateBody(&groundBodyDef);
-//		
-//		// Define the ground box shape.
-//		b2PolygonShape groundBox;		
-//		
-//        //        // bottom
-//        //        groundBox.SetAsEdge(b2Vec2(0,-screenSize.height/PTM_RATIO), b2Vec2(screenSize.width/PTM_RATIO,-screenSize.height/PTM_RATIO));
-//        //        groundBody->CreateFixture(&groundBox,0);
-//        //		
-//        //        // top
-//        //        groundBox.SetAsEdge(b2Vec2(0,screenSize.height/PTM_RATIO*2), b2Vec2(screenSize.width/PTM_RATIO,screenSize.height/PTM_RATIO*2));
-//        //        groundBody->CreateFixture(&groundBox,0);
-//		
-//		// left
-//		groundBox.SetAsEdge(b2Vec2(0,screenSize.height/PTM_RATIO*2), b2Vec2(0,-screenSize.height/PTM_RATIO*100));
-//		groundBody->CreateFixture(&groundBox,0);
-//		
-//		// right
-//		groundBox.SetAsEdge(b2Vec2(screenSize.width/PTM_RATIO,screenSize.height/PTM_RATIO*2), b2Vec2(screenSize.width/PTM_RATIO,-screenSize.height/PTM_RATIO*100));
-//		groundBody->CreateFixture(&groundBox,0);
-//        /*===================================================================================================*/		
-//        
-//        self.ballLayer = [BJBallLayer layer:world];
-//        [self addChild:ballLayer];
-//
-//        [self addFirstBlock];
-//        [self schedule: @selector(tick:)];  
-//    }
-//    return self;
-//}
 
 -(void) addNewObject:(int)count{
     
@@ -188,11 +111,10 @@ enum {
     cloud.width = obj.contentSize.width;
     cloud.height = obj.contentSize.height;
     cloud.currentPosX = rand()%320;
-//    cloud.currentPosY = -480/6*count -480*term;
-    cloud.currentPosY = obj.contentSize.height/2;
+    cloud.currentPosY = -obj.contentSize.height/2;
     
     b2BodyDef bodyDefBlock;
-    bodyDefBlock.type = b2_staticBody;
+    bodyDefBlock.type = b2_dynamicBody;
     bodyDefBlock.userData = obj;
     bodyDefBlock.position.Set(cloud.currentPosX/PTM_RATIO, cloud.currentPosY/PTM_RATIO);
     cloudBody[count] = _world->CreateBody(&bodyDefBlock);
@@ -225,8 +147,17 @@ enum {
 - (void)moveCloud:(ccTime) dt
 {
 //    NSLog(@"%f", cloudBody->GetLinearVelocity().y);
-    for (int i = 0; i <= cloud.count; i++) {
-        cloudBody[cloud.count]->SetLinearVelocity(b2Vec2(0.0, 5.0f));
+    for (int i = 0; i <= cloudCount; i++) {
+        cloudBody[i]->SetLinearVelocity(b2Vec2(0.0, 5.0f));
+//        NSLog(@"%d", i);
+    }
+//    NSLog(@"x:%f, y:%f", cloudBody[0]->GetPosition().x*PTM_RATIO, cloudBody[0]->GetPosition().y*PTM_RATIO);
+    for (int i = 0; i <= cloudCount; i++) {
+        if (cloudBody[i]->GetPosition().y*PTM_RATIO > 480) {
+            b2Vec2 moveFoewardPlayer(rand()%320/PTM_RATIO, 0);
+            cloudBody[i]->SetTransform(moveFoewardPlayer, 0);
+            NSLog(@"x:%f, y:%f", cloudBody[i]->GetPosition().x, cloudBody[i]->GetPosition().y);
+        }
     }
 //    cloudBody->ApplyForce(b2Vec2(0.0f, 18.0f), cloudBody->GetPosition());
 //    cloudBody->ApplyLinearImpulse(b2Vec2(0.0f, 3.0f), cloudBody->GetPosition());
@@ -251,16 +182,16 @@ enum {
 //			myAct.rotation = -1 * CC_RADIANS_TO_DEGREES(b->GetAngle());
 //        }
 //    }
-    if (cloud.interval % 200 == 0) {
-        if (cloud.count < 7) {
-            cloud.count++;
-            [self addNewObject:cloud.count];
+    if (cloud.interval % 40 == 39) {
+        if (cloudCount < 6) {
+            cloudCount++;
+            [self addNewObject:cloudCount];
 //            cloudBody[cloud.count]->SetLinearVelocity(b2Vec2(0.0, 5.0f));        
         }
         termNum++;
     }
     cloud.interval++;
-    NSLog(@"%d", cloud.count);
+//    NSLog(@"%d", cloud.interval);
     
 //    if (bodyBall->GetPosition().y*PTM_RATIO>(480-480.0/600*block.interval*termNum) || 
 //        bodyBall->GetPosition().y*PTM_RATIO<(-30/2-480.0/600*block.interval*(termNum)    )) {

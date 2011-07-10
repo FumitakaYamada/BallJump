@@ -18,7 +18,9 @@
     GLESDebugDraw *m_debugDraw;
     
     int termNum;
-    b2Body *cloudBody[7];
+    b2Body *cloudBody[8];
+    
+    int cloudCount;
     
 }
 + (id)layer:(b2World *)world;
