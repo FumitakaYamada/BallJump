@@ -14,6 +14,7 @@
 @interface BJBallLayer : CCLayer {
     
     b2World *_world;
+    b2Body *bodyBall;
     
 }
 + (id)layer:(b2World *)world;
