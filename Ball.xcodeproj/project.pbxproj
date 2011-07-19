@@ -160,6 +160,9 @@
 		B80235C213A62AAD00BF29FC /* GLES-Render.mm in Sources */ = {isa = PBXBuildFile; fileRef = B80235C113A62AAD00BF29FC /* GLES-Render.mm */; };
 		B80235C513A62AAD00BF29FC /* blocks.png in Resources */ = {isa = PBXBuildFile; fileRef = B80235C413A62AAD00BF29FC /* blocks.png */; };
 		B80235CC13A63BA000BF29FC /* Background.png in Resources */ = {isa = PBXBuildFile; fileRef = B80235CB13A63B9F00BF29FC /* Background.png */; };
+		B83593C713CA533C00C8B112 /* BJItemLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B83593C613CA533C00C8B112 /* BJItemLayer.m */; };
+		B83593CA13CA534D00C8B112 /* BJItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B83593C913CA534D00C8B112 /* BJItem.m */; };
+		B83593CC13CA550C00C8B112 /* coin.png in Resources */ = {isa = PBXBuildFile; fileRef = B83593CB13CA550C00C8B112 /* coin.png */; };
 		B846510113B9F15B00000027 /* BJGameController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B846510013B9F15B00000027 /* BJGameController.mm */; };
 		B846517813B9F36A00000027 /* BJBackgroundLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B846517713B9F36900000027 /* BJBackgroundLayer.m */; };
 		B846517B13B9F38B00000027 /* BJGameLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = B846517A13B9F38A00000027 /* BJGameLayer.mm */; };
@@ -491,6 +494,11 @@
 		B80235C313A62AAD00BF29FC /* GameConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameConfig.h; sourceTree = "<group>"; };
 		B80235C413A62AAD00BF29FC /* blocks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blocks.png; path = Resources/blocks.png; sourceTree = "<group>"; };
 		B80235CB13A63B9F00BF29FC /* Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Background.png; sourceTree = "<group>"; };
+		B83593C513CA533C00C8B112 /* BJItemLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BJItemLayer.h; sourceTree = "<group>"; };
+		B83593C613CA533C00C8B112 /* BJItemLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BJItemLayer.m; sourceTree = "<group>"; };
+		B83593C813CA534D00C8B112 /* BJItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BJItem.h; sourceTree = "<group>"; };
+		B83593C913CA534D00C8B112 /* BJItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BJItem.m; sourceTree = "<group>"; };
+		B83593CB13CA550C00C8B112 /* coin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coin.png; sourceTree = "<group>"; };
 		B84650FF13B9F15B00000027 /* BJGameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BJGameController.h; sourceTree = "<group>"; };
 		B846510013B9F15B00000027 /* BJGameController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BJGameController.mm; sourceTree = "<group>"; };
 		B846517613B9F36900000027 /* BJBackgroundLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BJBackgroundLayer.h; sourceTree = "<group>"; };
@@ -574,20 +582,7 @@
 				B80235B813A62AAD00BF29FC /* AppDelegate.mm */,
 				B80235BA13A62AAD00BF29FC /* RootViewController.h */,
 				B80235BB13A62AAD00BF29FC /* RootViewController.m */,
-				B84650FF13B9F15B00000027 /* BJGameController.h */,
-				B846510013B9F15B00000027 /* BJGameController.mm */,
-				B846517913B9F38A00000027 /* BJGameLayer.h */,
-				B846517A13B9F38A00000027 /* BJGameLayer.mm */,
-				B89C12F613C2F9060010DC41 /* BJBallLayer.h */,
-				B89C12F713C2F9060010DC41 /* BJBallLayer.mm */,
-				B89C12FA13C2F9190010DC41 /* BJCloudLayer.h */,
-				B89C12FB13C2F9190010DC41 /* BJCloudLayer.mm */,
-				B8E30A9213C305080071B193 /* BJCloud.h */,
-				B8E30A9313C305090071B193 /* BJCloud.m */,
-				B846517613B9F36900000027 /* BJBackgroundLayer.h */,
-				B846517713B9F36900000027 /* BJBackgroundLayer.m */,
-				B8FA222813BB71C9004E55A9 /* BJGameOverLayer.h */,
-				B8FA222913BB71C9004E55A9 /* BJGameOverLayer.m */,
+				B83593C313CA530500C8B112 /* GameScene */,
 				B80235BD13A62AAD00BF29FC /* HelloWorldLayer.h */,
 				B80235BE13A62AAD00BF29FC /* HelloWorldLayer.mm */,
 				B80235C013A62AAD00BF29FC /* GLES-Render.h */,
@@ -603,6 +598,7 @@
 		B80233F313A62AAA00BF29FC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B83593CB13CA550C00C8B112 /* coin.png */,
 				B8FA221E13BB671F004E55A9 /* object1.png */,
 				B8FA221213BB669A004E55A9 /* cloud1.png */,
 				B8FA221313BB669A004E55A9 /* cloud2.png */,
@@ -1068,6 +1064,31 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		B83593C313CA530500C8B112 /* GameScene */ = {
+			isa = PBXGroup;
+			children = (
+				B84650FF13B9F15B00000027 /* BJGameController.h */,
+				B846510013B9F15B00000027 /* BJGameController.mm */,
+				B846517913B9F38A00000027 /* BJGameLayer.h */,
+				B846517A13B9F38A00000027 /* BJGameLayer.mm */,
+				B89C12F613C2F9060010DC41 /* BJBallLayer.h */,
+				B89C12F713C2F9060010DC41 /* BJBallLayer.mm */,
+				B89C12FA13C2F9190010DC41 /* BJCloudLayer.h */,
+				B89C12FB13C2F9190010DC41 /* BJCloudLayer.mm */,
+				B8E30A9213C305080071B193 /* BJCloud.h */,
+				B8E30A9313C305090071B193 /* BJCloud.m */,
+				B83593C513CA533C00C8B112 /* BJItemLayer.h */,
+				B83593C613CA533C00C8B112 /* BJItemLayer.m */,
+				B83593C813CA534D00C8B112 /* BJItem.h */,
+				B83593C913CA534D00C8B112 /* BJItem.m */,
+				B846517613B9F36900000027 /* BJBackgroundLayer.h */,
+				B846517713B9F36900000027 /* BJBackgroundLayer.m */,
+				B8FA222813BB71C9004E55A9 /* BJGameOverLayer.h */,
+				B8FA222913BB71C9004E55A9 /* BJGameOverLayer.m */,
+			);
+			name = GameScene;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1138,6 +1159,7 @@
 				B8FA221913BB669A004E55A9 /* cloud3.png in Resources */,
 				B8FA221A13BB669A004E55A9 /* cloud4.png in Resources */,
 				B8FA221F13BB671F004E55A9 /* object1.png in Resources */,
+				B83593CC13CA550C00C8B112 /* coin.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1289,6 +1311,8 @@
 				B89C12F813C2F9060010DC41 /* BJBallLayer.mm in Sources */,
 				B89C12FC13C2F9190010DC41 /* BJCloudLayer.mm in Sources */,
 				B8E30A9413C305090071B193 /* BJCloud.m in Sources */,
+				B83593C713CA533C00C8B112 /* BJItemLayer.m in Sources */,
+				B83593CA13CA534D00C8B112 /* BJItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

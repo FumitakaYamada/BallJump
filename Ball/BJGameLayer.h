@@ -13,6 +13,13 @@
 #import "BJBallLayer.h"
 
 
+typedef enum _BJGameLayerZ {
+    BJLayerZPlayer  = 0x00000001 << 0,
+    BJLayerZItem        = 0x00000001 << 1,
+    BJLayerZCloud       = 0x00000001 << 2,
+    BJLayerZScore    = 0x00000001 << 3
+} BJGameLayerZ;
+
 @interface BJGameLayer : CCLayer <BJBallLayerDelegate> {
 
     b2World* world;

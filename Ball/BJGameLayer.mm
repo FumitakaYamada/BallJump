@@ -9,6 +9,7 @@
 #import "BJGameLayer.h"
 #import "BJBallLayer.h"
 #import "BJCloudLayer.h"
+#import "BJItemLayer.h"
 #import "BJGameOverLayer.h"
 #import "BJCloud.h"
 
@@ -25,11 +26,12 @@ enum {
 @property (nonatomic, retain) BJBallLayer *ballLayer;
 @property (nonatomic, retain) BJCloudLayer *cloudLayer;
 @property (nonatomic, retain) BJCloud *cloud;
+@property (nonatomic, retain) BJItemLayer *itemLayer;
 @property (assign) BOOL flag;
 @end
 
 @implementation BJGameLayer
-@synthesize ballLayer, cloudLayer;
+@synthesize ballLayer, cloudLayer, itemLayer;
 @synthesize cloud;
 @synthesize flag;
 
@@ -93,12 +95,15 @@ enum {
 /*===================================================================================================*/		
         
         self.ballLayer = [BJBallLayer layer:world];
-        [self addChild:ballLayer];
+        [self addChild:ballLayer z:BJLayerZPlayer];
         
         ballLayer.delegate = self;
         
         self.cloudLayer = [BJCloudLayer layer:world];
-        [self addChild:self.cloudLayer];
+        [self addChild:self.cloudLayer z:BJLayerZCloud];
+        
+        self.itemLayer = [BJItemLayer layer];
+        [self addChild:self.itemLayer z:BJLayerZItem];
         
         [self schedule: @selector(tick:)];  
     }

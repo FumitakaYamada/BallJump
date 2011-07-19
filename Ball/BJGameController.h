@@ -13,8 +13,7 @@
 typedef enum _BJLayerZ {
     BJLayerZBackground  = 0x00000001 << 0,
     BJLayerZMain        = 0x00000001 << 1,
-    BJLayerZScore       = 0x00000001 << 2,
-    BJLayerZGameOver    = 0x00000001 << 3
+    BJLayerZGameOver    = 0x00000001 << 2
 } BJLayerZ;
 
 @interface BJGameController : NSObject
