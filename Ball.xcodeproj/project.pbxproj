@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B800DC2213D6DA5200FBD075 /* BJScoreLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B800DC2113D6DA5200FBD075 /* BJScoreLayer.m */; };
 		B80233E313A62AAA00BF29FC /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B80233E213A62AAA00BF29FC /* QuartzCore.framework */; };
 		B80233E513A62AAA00BF29FC /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B80233E413A62AAA00BF29FC /* OpenGLES.framework */; };
 		B80233E713A62AAA00BF29FC /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B80233E613A62AAA00BF29FC /* OpenAL.framework */; };
@@ -182,6 +183,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B800DC2013D6DA5100FBD075 /* BJScoreLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BJScoreLayer.h; sourceTree = "<group>"; };
+		B800DC2113D6DA5200FBD075 /* BJScoreLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BJScoreLayer.m; sourceTree = "<group>"; };
 		B80233DE13A62AAA00BF29FC /* Ball.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ball.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B80233E213A62AAA00BF29FC /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		B80233E413A62AAA00BF29FC /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -1083,6 +1086,8 @@
 				B83593C913CA534D00C8B112 /* BJItem.m */,
 				B846517613B9F36900000027 /* BJBackgroundLayer.h */,
 				B846517713B9F36900000027 /* BJBackgroundLayer.m */,
+				B800DC2013D6DA5100FBD075 /* BJScoreLayer.h */,
+				B800DC2113D6DA5200FBD075 /* BJScoreLayer.m */,
 				B8FA222813BB71C9004E55A9 /* BJGameOverLayer.h */,
 				B8FA222913BB71C9004E55A9 /* BJGameOverLayer.m */,
 			);
@@ -1313,6 +1318,7 @@
 				B8E30A9413C305090071B193 /* BJCloud.m in Sources */,
 				B83593C713CA533C00C8B112 /* BJItemLayer.m in Sources */,
 				B83593CA13CA534D00C8B112 /* BJItem.m in Sources */,
+				B800DC2213D6DA5200FBD075 /* BJScoreLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
