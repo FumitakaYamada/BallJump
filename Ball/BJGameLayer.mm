@@ -140,26 +140,6 @@ enum {
 			myAct.rotation = -1 * CC_RADIANS_TO_DEGREES(b->GetAngle());
         }
     }
-    
-//    if (cloud.interval % 600 == 0) {
-//        for (int i = 1; i < 7; i++) {
-//            [self addNewObject:i Term:termNum];
-//        }
-//        termNum++;
-//    }
-//    cloud.interval++;
-    
-//    if (bodyBall->GetPosition().y*PTM_RATIO>(480-480.0/600*block.interval*termNum) || 
-//        bodyBall->GetPosition().y*PTM_RATIO<(-30/2-480.0/600*block.interval*(termNum)    )) {
-//        if (self.flag == NO) {
-//            int score = 100;
-//            NSDictionary *dic = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%d", score] forKey:@"KEY"];
-//            NSNotification *n = [NSNotification notificationWithName:@"GameOver" object:self userInfo:dic];
-//            [[NSNotificationCenter defaultCenter] postNotification:n];
-//            [self removeChild:self.sprite cleanup:YES];
-//            self.flag = YES;
-//        }
-//    }
 }
 
 - (void)sendBallRect:(CGRect)rect{
@@ -178,16 +158,13 @@ enum {
     [[NSNotificationCenter defaultCenter] postNotification:n];
 }
 
-// on "dealloc" you need to release all your retained objects
 - (void) dealloc
 {
-	// in case you have something to dealloc, do it in this method
 	delete world;
 	world = NULL;
 	
 	delete m_debugDraw;
     
-	// don't forget to call "super dealloc"
 	[super dealloc];
 }
 
