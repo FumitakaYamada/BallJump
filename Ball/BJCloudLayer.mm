@@ -205,7 +205,6 @@ enum {
     if (cloud.interval % 75 == 74) {
         if (cloudCount < 5) {
             cloudCount++;
-            NSLog(@"%d", cloudCount);
             [self addNewObject:cloudCount];
         }
     }
