@@ -11,16 +11,17 @@
 #import "Box2D.h"
 #import "GLES-Render.h"
 #import "BJBallLayer.h"
+#import "BJItemLayer.h"
 
 
 typedef enum _BJGameLayerZ {
-    BJLayerZPlayer  = 0x00000001 << 0,
-    BJLayerZItem        = 0x00000001 << 1,
-    BJLayerZCloud       = 0x00000001 << 2,
-    BJLayerZScore    = 0x00000001 << 3
+    BJLayerZItem    = 0x00000001 << 0,
+    BJLayerZPlayer  = 0x00000001 << 1,
+    BJLayerZCloud   = 0x00000001 << 2,
+    BJLayerZScore   = 0x00000001 << 3
 } BJGameLayerZ;
 
-@interface BJGameLayer : CCLayer <BJBallLayerDelegate> {
+@interface BJGameLayer : CCLayer <BJBallLayerDelegate, BJItemLayerDelegate> {
 
     b2World* world;
     GLESDebugDraw *m_debugDraw;
