@@ -13,4 +13,5 @@
     
 }
 + (id)layer;
+- (void)didHit:(CGRect)rect;
 @end

@@ -154,6 +154,10 @@ enum {
 //    }
 }
 
+- (void)sendBallRect:(CGRect)rect{
+    [itemLayer didHit:rect];
+}
+
 - (void)gameOver{
     [self removeChild:ballLayer cleanup:YES];
 //    NSDictionary *dic = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%d", score] forKey:@"KEY"];

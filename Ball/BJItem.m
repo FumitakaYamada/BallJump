@@ -9,5 +9,5 @@
 #import "BJItem.h"
 
 @implementation BJItem
-@synthesize x, y, width, height, interval, level;
+@synthesize x, y, width, height, interval, level, touchedFlag;
 @end

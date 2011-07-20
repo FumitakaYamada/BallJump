@@ -10,14 +10,18 @@
 
 @interface BJItem : NSObject{
 
-    int x;
-    int y;
-    int width;
-    int height;
+    float x;
+    float y;
+    float width;
+    float height;
     int interval;
     
     int level;
     
+    BOOL touchedFlag;
+    
 }
-@property (assign) int x, y, width, height, interval, level;
+@property (assign) float x, y, width, height;
+@property (assign) int interval, level;
+@property (assign) BOOL touchedFlag;
 @end
