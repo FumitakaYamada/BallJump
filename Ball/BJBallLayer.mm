@@ -13,11 +13,12 @@
 
 @interface BJBallLayer()
 @property (nonatomic, retain) CCSprite *player;
+@property (assign) CGRect ballRect;
 @end
 
 @implementation BJBallLayer
 @synthesize delegate = _delegate;
-@synthesize player;
+@synthesize player, ballRect;
 
 + (id)layer:(b2World *)world{
     return [[[BJBallLayer alloc] initWithWorld:world] autorelease];
@@ -55,7 +56,7 @@
         fixtureDef.restitution = 0.8f;  // 霍ｳ縺ｭ霑斐ｊ
         ballBody->CreateFixture(&fixtureDef);
         
-        [self schedule:@selector(checkGameOver:)];
+        [self schedule:@selector(checkBallRect:)];
 
         _world = NULL;
     }
@@ -64,7 +65,11 @@
 
 
 
-- (void)checkGameOver:(ccTime)dt{
+- (void)checkBallRect:(ccTime)dt{
+    ballRect = CGRectMake(ballBody->GetPosition().x*PTM_RATIO - player.contentSize.width/2, ballBody->GetPosition().y*PTM_RATIO - player.contentSize.height, player.contentSize.width, player.contentSize.height);
+    if ([_delegate respondsToSelector:@selector(sendBallRect:)]) {
+        [_delegate sendBallRect:ballRect];
+    }
     float playerPosY = ballBody->GetPosition().y*PTM_RATIO;
     if (playerPosY > 480 + player.contentSize.width/2 || playerPosY < 0 - player.contentSize.width/2) {
         if ([_delegate respondsToSelector:@selector(gameOver)]) {

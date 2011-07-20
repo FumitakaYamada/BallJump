@@ -12,6 +12,7 @@
 #import "GLES-Render.h"
 
 @protocol BJBallLayerDelegate <NSObject>
+- (void)sendBallRect:(CGRect)rect;
 - (void)gameOver;
 @end
 
