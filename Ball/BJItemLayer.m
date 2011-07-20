@@ -17,6 +17,7 @@
 @end
 
 @implementation BJItemLayer
+@synthesize delegate = _delegate;
 @synthesize item, itemSprite, score;
 
 + (id)layer{
@@ -73,6 +74,9 @@
             NSLog(@"score:%d", score);
             itemSprite.position = ccp(rand()%280 + 20, -itemSprite.position.y);
             [self removeChild:itemSprite cleanup:YES];
+            if ([_delegate respondsToSelector:@selector(sendTotalScore:)]) {
+                [_delegate sendTotalScore:score];
+            }
         }
     }
 }

@@ -10,6 +10,7 @@
 #import "BJBallLayer.h"
 #import "BJCloudLayer.h"
 #import "BJItemLayer.h"
+#import "BJScoreLayer.h"
 #import "BJGameOverLayer.h"
 #import "BJCloud.h"
 
@@ -27,13 +28,15 @@ enum {
 @property (nonatomic, retain) BJCloudLayer *cloudLayer;
 @property (nonatomic, retain) BJCloud *cloud;
 @property (nonatomic, retain) BJItemLayer *itemLayer;
+@property (nonatomic, retain) BJScoreLayer *scoreLayer;
+@property (assign) int totalScore;
 @property (assign) BOOL flag;
 @end
 
 @implementation BJGameLayer
-@synthesize ballLayer, cloudLayer, itemLayer;
+@synthesize ballLayer, cloudLayer, itemLayer, scoreLayer;
 @synthesize cloud;
-@synthesize flag;
+@synthesize totalScore, flag;
 
 + (id)layer{
     return [[[BJGameLayer alloc] init] autorelease];
@@ -105,7 +108,12 @@ enum {
         self.itemLayer = [BJItemLayer layer];
         [self addChild:self.itemLayer z:BJLayerZItem];
         
-        [self schedule: @selector(tick:)];  
+        itemLayer.delegate = self;
+        
+        self.scoreLayer = [BJScoreLayer layer];
+        [self addChild:self.scoreLayer z:BJLayerZScore];
+        
+        [self schedule: @selector(tick:)];
     }
     return self;
 }
@@ -158,10 +166,15 @@ enum {
     [itemLayer didHit:rect];
 }
 
+- (void)sendTotalScore:(int)score{
+    totalScore = score;
+    [scoreLayer rewriteScore:score];
+}
+
 - (void)gameOver{
     [self removeChild:ballLayer cleanup:YES];
-//    NSDictionary *dic = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%d", score] forKey:@"KEY"];
-    NSNotification *n = [NSNotification notificationWithName:@"GameOver" object:self userInfo:NULL];
+    NSDictionary *dic = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%d", totalScore] forKey:@"KEY"];
+    NSNotification *n = [NSNotification notificationWithName:@"GameOver" object:self userInfo:dic];
     [[NSNotificationCenter defaultCenter] postNotification:n];
 }
 
