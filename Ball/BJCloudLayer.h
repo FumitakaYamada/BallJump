@@ -15,7 +15,6 @@
 @interface BJCloudLayer : CCLayer {
     
     b2World* _world;
-    GLESDebugDraw *m_debugDraw;
     
     b2Body *cloudBody[7];
     
