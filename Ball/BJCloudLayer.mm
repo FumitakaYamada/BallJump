@@ -54,7 +54,7 @@ enum {
         
         cloud.width = cloudSprite.contentSize.width;
         cloud.height = cloudSprite.contentSize.height;
-        cloud.currentPosX = 320/2;
+        cloud.currentPosX = [CCDirector sharedDirector].winSize.width/2;
         cloud.currentPosY = -cloudSprite.contentSize.height/2;
         
         b2BodyDef cloudBodyDef;
