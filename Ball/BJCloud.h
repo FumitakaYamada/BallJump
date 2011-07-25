@@ -14,15 +14,13 @@
 @interface BJCloud : NSObject {
     float currentX;
     float currentY;
-    float nextPosX;
-    float nextPosY;
     int width;
     int height;
     int imageNum;
     int interval;
     int count;
 }
-@property (assign) float currentPosX, currentPosY, nextPosX, nextPosY;
+@property (assign) float currentPosX, currentPosY;
 @property (assign) int width, height, imageNum, interval, count;
 - (void)moveWithHeight:(b2Body *)body h:(int)h;
 @end
