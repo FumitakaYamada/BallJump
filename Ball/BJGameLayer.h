@@ -15,10 +15,10 @@
 
 
 typedef enum _BJGameLayerZ {
-    BJLayerZItem    = 0x00000001 << 0,
-    BJLayerZPlayer  = 0x00000001 << 1,
-    BJLayerZCloud   = 0x00000001 << 2,
-    BJLayerZScore   = 0x00000001 << 3
+    BJLayerZItem    = 0x0001 << 0,
+    BJLayerZPlayer  = 0x0001 << 1,
+    BJLayerZCloud   = 0x0001 << 2,
+    BJLayerZScore   = 0x0001 << 3
 } BJGameLayerZ;
 
 @interface BJGameLayer : CCLayer <BJBallLayerDelegate, BJItemLayerDelegate> {
