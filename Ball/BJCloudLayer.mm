@@ -45,21 +45,11 @@ enum {
         CCSprite *cloudSprite;
         cloud = [BJCloud new];
         cloud.imageNum = rand()%3 + 1;
-        if (cloud.imageNum == 1) {
-            cloudSprite = [CCSprite spriteWithFile:@"cloud1.png"];
-            [self addChild:cloudSprite z:1];
-        }
-        if (cloud.imageNum == 2) {
-            cloudSprite = [CCSprite spriteWithFile:@"cloud2.png"];
-            [self addChild:cloudSprite z:1];
-        }
-        if (cloud.imageNum == 3) {
-            cloudSprite = [CCSprite spriteWithFile:@"cloud3.png"];
-            [self addChild:cloudSprite z:1];
-        }
-        if (cloud.imageNum == 4) {
-            cloudSprite = [CCSprite spriteWithFile:@"cloud4.png"];
-            [self addChild:cloudSprite z:1];
+        for (int i = 1; i < 5; i++) {
+            if (cloud.imageNum == i) {
+                cloudSprite = [CCSprite spriteWithFile:[NSString stringWithFormat:@"cloud%d.png", i]];
+                [self addChild:cloudSprite z:1];
+            }
         }
         
         cloud.width = cloudSprite.contentSize.width;
@@ -92,21 +82,11 @@ enum {
     CCSprite *cloudSprite;
     cloud = [BJCloud new];
     cloud.imageNum = rand()%4 + 1;
-    if (cloud.imageNum == 1) {
-        cloudSprite = [CCSprite spriteWithFile:@"cloud1.png"];
-        [self addChild:cloudSprite z:1];
-    }
- 	if (cloud.imageNum == 2) {
-        cloudSprite = [CCSprite spriteWithFile:@"cloud2.png"];
-        [self addChild:cloudSprite z:1];
-    }
-    if (cloud.imageNum == 3) {
-        cloudSprite = [CCSprite spriteWithFile:@"cloud3.png"];
-        [self addChild:cloudSprite z:1];
-    }
-    if (cloud.imageNum == 4) {
-        cloudSprite = [CCSprite spriteWithFile:@"cloud4.png"];
-        [self addChild:cloudSprite z:1];
+    for (int i = 1; i < 5; i++) {
+        if (cloud.imageNum == i) {
+            cloudSprite = [CCSprite spriteWithFile:[NSString stringWithFormat:@"cloud%d.png", i]];
+            [self addChild:cloudSprite z:1];
+        }
     }
     
     cloud.width = cloudSprite.contentSize.width;
