@@ -110,20 +110,7 @@ enum {
 - (void)moveCloud:(ccTime) dt
 {
     for (int i = 0; i <= cloudCount; i++) {
-        cloudBody[i]->SetLinearVelocity(b2Vec2(0.0, 2.5f));
-        if (cloudBody[i]->GetPosition().y*PTM_RATIO > 480 + cloud.height) {
-            float nextPosY = rand()%320/PTM_RATIO;
-            if (nextPosY < 40) {
-                b2Vec2 moveFoewardPlayer(nextPosY + 40/PTM_RATIO, -cloud.height*2/PTM_RATIO);
-                cloudBody[i]->SetTransform(moveFoewardPlayer, 0);
-            }else if (nextPosY > 280){
-                b2Vec2 moveFoewardPlayer(nextPosY - 40/PTM_RATIO, -cloud.height*2/PTM_RATIO);
-                cloudBody[i]->SetTransform(moveFoewardPlayer, 0);
-            }else {
-                b2Vec2 moveFoewardPlayer(nextPosY, -cloud.height*2/PTM_RATIO);
-                cloudBody[i]->SetTransform(moveFoewardPlayer, 0);
-            }
-        }
+        [cloud moveWithHeight:cloudBody[i] h:cloud.height];
     }
     
     if (cloud.interval % 75 == 74) {

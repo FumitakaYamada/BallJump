@@ -7,13 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "cocos2d.h"
+#import "Box2D.h"
+#import "GLES-Render.h"
 
 @interface BJCloud : NSObject {
     float currentX;
     float currentY;
-    float nextX;
-    float nextY;
+    float nextPosX;
+    float nextPosY;
     int width;
     int height;
     int imageNum;
@@ -22,4 +24,5 @@
 }
 @property (assign) float currentPosX, currentPosY, nextPosX, nextPosY;
 @property (assign) int width, height, imageNum, interval, count;
+- (void)moveWithHeight:(b2Body *)body h:(int)h;
 @end
