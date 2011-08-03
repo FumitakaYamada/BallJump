@@ -7,7 +7,6 @@
 //
 
 #import "BJCloudLayer.h"
-#import "BJCloud.h"
 #import "BJBallLayer.h"
 #import "BJGameOverLayer.h"
 
@@ -20,14 +19,7 @@ enum {
 	kTagAnimation1 = 1,
 };
 
-@interface BJCloudLayer()
-@property (nonatomic, retain) BJCloud *cloud;
-@property (assign) BOOL flag;
-@end
-
 @implementation BJCloudLayer
-@synthesize cloud;
-@synthesize flag;
 
 + (id)layer:(b2World *)world{
     return [[[BJCloudLayer alloc] initWithWorld:world] autorelease];
@@ -39,87 +31,33 @@ enum {
         
         _world = world;
         
-        cloud.count = 0;
-        cloudCount = 0;
-        
-        CCSprite *cloudSprite;
-        cloud = [BJCloud new];
-        cloud.imageNum = rand()%3 + 1;
-        for (int i = 1; i < 5; i++) {
-            if (cloud.imageNum == i) {
-                cloudSprite = [CCSprite spriteWithFile:[NSString stringWithFormat:@"cloud%d.png", i]];
-                [self addChild:cloudSprite z:1];
-            }
-        }
-        
-        cloud.width = cloudSprite.contentSize.width;
-        cloud.height = cloudSprite.contentSize.height;
-        cloud.currentPosX = [CCDirector sharedDirector].winSize.width/2;
-        cloud.currentPosY = -cloudSprite.contentSize.height/2;
-        
-        b2BodyDef cloudBodyDef;
-        cloudBodyDef.type = b2_dynamicBody;
-        cloudBodyDef.userData = cloudSprite;
-        cloudBodyDef.position.Set(cloud.currentPosX/PTM_RATIO, cloud.currentPosY/PTM_RATIO);
-        cloudBody[0] = _world->CreateBody(&cloudBodyDef);
-        b2PolygonShape shape;
-        shape.SetAsBox((cloudSprite.contentSize.width/2 - 5)/PTM_RATIO, (cloudSprite.contentSize.height/2 - 15)/PTM_RATIO, b2Vec2(0, 0), 0.0f);
-        b2FixtureDef cloudFixtureDef;
-        cloudFixtureDef.shape = &shape;
-        
-        cloudBody[0]->CreateFixture(&shape, 0.0f);
+        cloud[0] = [BJCloud new];
+        [cloud[0] addNewCloud:self world:_world number:0];
+        cloud[0].exist = YES;
 
-        [self schedule:@selector(moveCloud:)];
+        [self schedule:@selector(timer:)];
 
     }
     return self;
 }
 
--(void) addNewObject:(int)count{
-    
-    srand(time(NULL));
-    
-    CCSprite *cloudSprite;
-    cloud = [BJCloud new];
-    cloud.imageNum = rand()%4 + 1;
-    for (int i = 1; i < 5; i++) {
-        if (cloud.imageNum == i) {
-            cloudSprite = [CCSprite spriteWithFile:[NSString stringWithFormat:@"cloud%d.png", i]];
-            [self addChild:cloudSprite z:1];
-        }
-    }
-    
-    cloud.width = cloudSprite.contentSize.width;
-    cloud.height = cloudSprite.contentSize.height;
-    cloud.currentPosX = rand()%320;
-    cloud.currentPosY = -cloudSprite.contentSize.height/2;
-    
-    b2BodyDef cloudbBodyDef;
-    cloudbBodyDef.type = b2_dynamicBody;
-    cloudbBodyDef.userData = cloudSprite;
-    cloudbBodyDef.position.Set(cloud.currentPosX/PTM_RATIO, cloud.currentPosY/PTM_RATIO);
-    cloudBody[count] = _world->CreateBody(&cloudbBodyDef);
-    b2PolygonShape shape;
-    shape.SetAsBox((cloudSprite.contentSize.width/2 - 5)/PTM_RATIO, (cloudSprite.contentSize.height/2 - 15)/PTM_RATIO, b2Vec2(0, 0), 0.0f);
-    
-    cloudBody[count]->CreateFixture(&shape, 0.0f);
-    
-    cloud.currentPosY = cloudBody[count]->GetPosition().y * PTM_RATIO;
-}
-
-- (void)moveCloud:(ccTime) dt
+- (void)timer:(ccTime) dt
 {
-    for (int i = 0; i <= cloudCount; i++) {
-        [cloud moveWithHeight:cloudBody[i] h:cloud.height];
-    }
-    
-    if (cloud.interval % 75 == 74) {
-        if (cloudCount < 5) {
-            cloudCount++;
-            [self addNewObject:cloudCount];
+    for (int i = 0; i < CLOUD_NUM; i++) {
+        if (cloud[i].exist == YES) {
+            [cloud[i] moveCloud:i];
+            cloud[i].interval++;
+            if (cloud[i].interval%60 == 0) {
+                if (i < CLOUD_NUM - 1) {
+                    if (cloud[i+1].exist == NO) {
+                        cloud[i+1] = [BJCloud new];
+                        [cloud[i+1] addNewCloud:self world:_world number:(i+1)];
+                        cloud[i+1].exist = YES;
+                    }
+                }
+            }
         }
     }
-    cloud.interval++;
 }
 
 - (void) dealloc

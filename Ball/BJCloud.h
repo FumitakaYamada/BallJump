@@ -11,16 +11,18 @@
 #import "Box2D.h"
 #import "GLES-Render.h"
 
-@interface BJCloud : NSObject {
-    float currentX;
-    float currentY;
-    int width;
-    int height;
-    int imageNum;
-    int interval;
-    int count;
+#define CLOUD_NUM 7
+
+@interface BJCloud : CCSprite {
+
+    b2World *_world;
+    CCSprite *cloudSprite[CLOUD_NUM];
+    b2Body *cloudBody[CLOUD_NUM];
+
 }
 @property (assign) float currentPosX, currentPosY;
-@property (assign) int width, height, imageNum, interval, count;
-- (void)moveWithHeight:(b2Body *)body h:(int)h;
+@property (assign) int width, height, interval, count;
+@property (assign) BOOL exist;
+- (void)addNewCloud:(CCLayer *)layer world:(b2World *)world number:(int)number;
+- (void)moveCloud:(int)number;
 @end
